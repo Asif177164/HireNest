@@ -1,42 +1,107 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  text-decoration: none;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.hero-container {
+  width: 100%;
+  min-height: 120vh;           /* Increased from 100vh to 120vh for more height */
+  background-size: 100% 100%;  /* This stretches image to fill FULL width and height */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: white;
+  position: relative;
+  animation: changeBackground 15s infinite;  /* ONLY ADDITION */
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* ADD THIS - Automatic background slideshow with your 3 images */
+@keyframes changeBackground {
+  0%, 30% {
+    background-image: url("assets/background.png.jpg");
   }
-  to {
-    transform: rotate(360deg);
+  33%, 63% {
+    background-image: url("assets/background1.png");
+  }
+  66%, 96% {
+    background-image: url("assets/background2.png");
+  }
+  100% {
+    background-image: url("assets/background.png.jpg");
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* Hero content container - controls position of BOTH text and buttons */
+.hero-content {
+  position: absolute;
+  top: 30%;                  /* Adjusted for larger container */
+  left: 5%;                  /* Distance from left */
+  max-width: 800px;
+  text-align: left;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.card {
-  padding: 2em;
+/* Hero heading */
+.hero-content h1 {
+  font-size: 3.5rem;
+  line-height: 1.2;
+  margin: 0;
+  color: #fbfbfb;
 }
 
-.read-the-docs {
-  color: #888;
+/* Hero paragraph */
+.hero-content p {
+  font-size: 1.3rem;
+  margin: 0;
+  color: #dfe8f0;
+}
+
+/* Button group container - SINGLE DECLARATION */
+.button-group { 
+  display: flex;
+  gap: 1.7rem;
+  flex-wrap: nowrap;
+  font-size: 18px;
+  margin-top: 0.5rem;
+}
+
+/* Common button style */
+.button-group button {
+  min-width: 40px;
+  padding: 0.9rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  font-weight: 600;
+}
+
+/* Get Started */
+.btn-getStarted {
+  background-color: #10b981;
+  color: #fff;
+}
+
+.btn-getStarted:hover {
+  background-color: #059669;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Learn More */
+.btn-learnmore {
+  background-color: #f59e0b;
+  color: #fff;
+}
+
+.btn-learnmore:hover {
+  background-color: #d97706;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
