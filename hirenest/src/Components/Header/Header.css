@@ -134,8 +134,8 @@ nav ul li button {
   color: #0c4a6e;
   box-shadow:
     0 0 0 1px rgba(56, 189, 248, 0.2),
-    0 25px 60px rgba(14, 116, 144, 0.2),
-    0 0 80px rgba(186, 230, 253, 0.3);
+    0 25px 60px rgba(0, 0, 0, 0.2),
+    0 0 80px rgba(0, 0, 0, 0.3);
   animation: cardSlideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -149,7 +149,7 @@ nav ul li button {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: rgba(14, 116, 144, 0.1);
+  background: rgba(0, 2, 2, 0.1);
   border: 1px solid rgba(14, 116, 144, 0.2);
   color: rgba(12, 74, 110, 0.5);
   width: 32px;
@@ -274,15 +274,15 @@ nav ul li button {
 }
 
 .modal-btn--signin {
-  background: rgba(14, 116, 144, 0.12);
-  color: #0c4a6e;
-  border: 1px solid rgba(14, 116, 144, 0.3);
+  background: #f59e0b;
+  color: #f9f9f9;
+  border: 1px solid #f59e0b;
 }
 
 .modal-btn--signin:hover {
-  background: rgba(14, 116, 144, 0.22);
-  border-color: rgba(14, 116, 144, 0.55);
-  box-shadow: 0 0 20px rgba(14, 116, 144, 0.15);
+  background: #fda103;
+  border-color: #f59e0b;
+  box-shadow: 0 0 20px #f59e0b;
   transform: translateY(-2px);
 }
 
