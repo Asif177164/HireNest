@@ -1,12 +1,20 @@
+import { useState } from "react";
 import Header from "../Header/Header";
 import { FaBriefcase, FaSearch, FaCreditCard, FaComments, FaStar, FaRobot } from "react-icons/fa";
 
-
 const Home = () => {
+  const [showSignIn, setShowSignIn] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(false);
+
   return (
     <>
       <div className="hero-container">
-        <Header />
+        <Header
+          showSignIn={showSignIn}
+          setShowSignIn={setShowSignIn}
+          showSignUp={showSignUp}
+          setShowSignUp={setShowSignUp}
+        />
 
         <div className="hero-content">
           <h1>
@@ -17,7 +25,9 @@ const Home = () => {
           <p>Build your skills, learn new tech, and grow your career.</p>
 
           <div className="button-group">
-            <button className="btn-getStarted">Get Started</button>
+            <button className="btn-getStarted" onClick={() => setShowSignUp(true)}>
+              Get Started
+            </button>
             <button className="btn-learnmore">Learn More</button>
           </div>
         </div>
@@ -72,18 +82,22 @@ const Home = () => {
               <p>Get help with job searches, application tips, and career advice</p>
               <button className="feature-btn">Learn More</button>
             </div>
-            
           </div>
 
           <div className="cta-section">
             <h3>Ready to Transform Your Career or Hiring?</h3>
             <div className="cta-buttons">
-              <button className="btn-primary">I'm a Job Seeker</button>
-              <button className="btn-secondary">I'm Hiring</button>
+              <button className="btn-primary" onClick={() => setShowSignUp(true)}>
+                I'm a Job Seeker
+              </button>
+              <button className="btn-secondary" onClick={() => setShowSignUp(true)}>
+                I'm Hiring
+              </button>
             </div>
           </div>
         </div>
       </section>
+
       <div className="ai-assist">
         <div className="ai-content">
           <div className="ai-icon"><FaRobot /></div>
@@ -94,9 +108,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-
-      
-
     </>
   );
 };
