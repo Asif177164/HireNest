@@ -19,7 +19,7 @@
 
 @keyframes changeBackground {
   0%, 30% {
-    background-image: url("assets/background.png.jpg");
+    background-image: url("assets/background.png");
   }
   33%, 63% {
     background-image: url("assets/background1.png");
@@ -28,7 +28,7 @@
     background-image: url("assets/background2.png");
   }
   100% {
-    background-image: url("assets/background.png.jpg");
+    background-image: url("assets/background.png");
   }
 }
 
