@@ -66,6 +66,12 @@ const Home = () => {
               <button className="feature-btn">Learn More</button>
             </div>
 
+            <div className="feature-card">
+              <div className="feature-icon"><FaRobot /></div>
+              <h3>AI Assistant</h3>
+              <p>Get help with job searches, application tips, and career advice</p>
+              <button className="feature-btn">Learn More</button>
+            </div>
             
           </div>
 

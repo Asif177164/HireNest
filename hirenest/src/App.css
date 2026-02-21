@@ -332,9 +332,9 @@
 .ai-assist {
   position: fixed;
   right: 20px;
-  bottom: 20px;
+  bottom: 40px;
   width: 220px;
-  background: linear-gradient(180deg,#ffffff,#f8fafc);
+  background: linear-gradient(180deg,#c2b3b1,#d7db96);
   border-radius:12px;
   box-shadow:0 10px 30px rgba(2,6,23,0.12);
   padding:12px;
@@ -343,12 +343,20 @@
   align-items:center;
   gap:12px;
 }
+.ai-assist:hover {
+  transform: translateY(-5px) scale(1.1)  ;
+  box-shadow: 0 12px 25px rgba(2,6,23,0.15);
+}
 .ai-assist .ai-icon { font-size:28px; color:#10b981; }
 .ai-assist .ai-text strong{ display:block; font-size:1rem; color:#0f172a; }
 .ai-assist .ai-text p{ margin:3px 0 8px; color:#475569; font-size:0.85rem; }
 .ai-btn{ background:#10b981;color:white;border:none;padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:600; }
 .ai-btn:hover{ background:#059669; }
 
+.ai-assist:hover .ai-icon {
+  color: #f59e0b;
+  transform: rotate(5deg);
+}
 @media (max-width: 900px) {
   .ai-assist {
     right: 16px;
