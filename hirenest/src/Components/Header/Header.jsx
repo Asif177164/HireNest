@@ -38,12 +38,16 @@ const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp }) => {
     }
     alert(`Signed Up as ${signUpData.username}`);
     setShowSignUp(false);
-    setSignUpData({ firstName: "", lastName: "", email: "", username: "", password: "", confirmPassword: "", role: "" });
+    setSignUpData({
+      firstName: "", lastName: "", email: "", username: "",
+      password: "", confirmPassword: "", role: ""
+    });
   };
 
   return (
     <>
-      <header className="hero-container">
+      {/* ─── Header (sits on TOP of the hero background) ─── */}
+      <header>
         <div className="logo">
           <img src={logo} alt="logo" />
         </div>
@@ -53,20 +57,37 @@ const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp }) => {
             <li><a href="#">Home</a></li>
             <li><a href="#">Explore Jobs</a></li>
             <li><a href="#">Admin Panel</a></li>
-            <li><button className="btn-signin" onClick={() => setShowSignIn(true)}>Sign In</button></li>
-            <li><button className="btn-signup" onClick={() => setShowSignUp(true)}>Sign Up</button></li>
+            <li>
+              <button className="btn-signin" onClick={() => setShowSignIn(true)}>
+                Sign In
+              </button>
+            </li>
+            <li>
+              <button className="btn-signup" onClick={() => setShowSignUp(true)}>
+                Sign Up
+              </button>
+            </li>
           </ul>
         </nav>
       </header>
 
-      {/* Sign In Modal */}
+      {/* ─── Sign In Modal ─────────────────────────────── */}
       {showSignIn && (
         <div className="modal-overlay" onClick={() => setShowSignIn(false)}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setShowSignIn(false)}>✕</button>
+
+            {/* Close button — stops propagation so overlay click doesn't fire too */}
+            <button
+              className="modal-close"
+              onClick={(e) => { e.stopPropagation(); setShowSignIn(false); }}
+            >
+              ✕
+            </button>
+
             <div className="modal-icon">🔑</div>
             <h2>Welcome Back</h2>
             <p className="modal-subtitle">Sign in to your account</p>
+
             <form onSubmit={submitSignIn}>
               <div className="input-group">
                 <span className="input-icon">👤</span>
@@ -89,8 +110,11 @@ const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp }) => {
                   required
                 />
               </div>
-              <button type="submit" className="modal-btn modal-btn--signin">Sign In</button>
+              <button type="submit" className="modal-btn modal-btn--signin">
+                Sign In
+              </button>
             </form>
+
             <p className="modal-switch">
               Don't have an account?{" "}
               <span onClick={() => { setShowSignIn(false); setShowSignUp(true); }}>
@@ -101,14 +125,22 @@ const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp }) => {
         </div>
       )}
 
-      {/* Sign Up Modal */}
+      {/* ─── Sign Up Modal ─────────────────────────────── */}
       {showSignUp && (
         <div className="modal-overlay" onClick={() => setShowSignUp(false)}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setShowSignUp(false)}>✕</button>
+
+            <button
+              className="modal-close"
+              onClick={(e) => { e.stopPropagation(); setShowSignUp(false); }}
+            >
+              ✕
+            </button>
+
             <div className="modal-icon">🚀</div>
             <h2>Create Account</h2>
             <p className="modal-subtitle">Join us today, it's free</p>
+
             <form onSubmit={submitSignUp}>
               <div className="input-row">
                 <div className="input-group">
@@ -132,6 +164,7 @@ const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp }) => {
                   />
                 </div>
               </div>
+
               <div className="input-group">
                 <span className="input-icon">📧</span>
                 <input
@@ -143,6 +176,7 @@ const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp }) => {
                   required
                 />
               </div>
+
               <div className="input-group">
                 <span className="input-icon">👤</span>
                 <input
@@ -153,6 +187,7 @@ const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp }) => {
                   required
                 />
               </div>
+
               <div className="role-selector">
                 <button
                   type="button"
@@ -173,6 +208,7 @@ const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp }) => {
                   <span className="role-desc">Hiring talent</span>
                 </button>
               </div>
+
               <div className="input-group">
                 <span className="input-icon">🔒</span>
                 <input
@@ -184,6 +220,7 @@ const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp }) => {
                   required
                 />
               </div>
+
               <div className="input-group">
                 <span className="input-icon">✅</span>
                 <input
@@ -195,8 +232,12 @@ const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp }) => {
                   required
                 />
               </div>
-              <button type="submit" className="modal-btn modal-btn--signup">Sign Up</button>
+
+              <button type="submit" className="modal-btn modal-btn--signup">
+                Sign Up
+              </button>
             </form>
+
             <p className="modal-switch">
               Already have an account?{" "}
               <span onClick={() => { setShowSignUp(false); setShowSignIn(true); }}>
