@@ -1,0 +1,416 @@
+.page-container {
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 60%, #10b981 100%);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+}
+
+.page-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.intro-text {
+  font-size: 1.1rem;
+  max-width: 600px;
+  line-height: 1.6;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  margin-bottom: 40px;
+}
+
+.content-section {
+  max-width: 1000px;
+  margin: 40px 0;
+  width: 100%;
+}
+
+.content-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+}
+
+/* Features Grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-5px);
+}
+
+.feature-card h3 {
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+}
+
+/* Developers List */
+.developers-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.developer-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Platforms Grid */
+.platforms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.platform-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.platform-card:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.platform-icon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+/* Services Grid */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.service-badge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 12px 20px;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-weight: 600;
+}
+
+/* Process Lists */
+.process-list {
+  list-style: none;
+  padding: 0;
+}
+
+.process-list li {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px 20px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border-left: 4px solid #00b894;
+}
+
+/* Specialties Grid */
+.specialties-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.specialty-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.specialty-card h4 {
+  margin-bottom: 10px;
+}
+
+/* Categories Grid */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+}
+
+.category-badge {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 15px 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}\n\n.category-badge:hover {\n  background: rgba(255, 255, 255, 0.25);\n}
+
+/* Steps List */
+.steps-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.step-number {
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 184, 148, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  border: 2px solid #00b894;
+}
+
+/* Process Columns */
+.process-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 20px;
+}
+
+.process-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.process-step {
+  width: 45px;
+  height: 45px;
+  background: rgba(0, 184, 148, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  border: 2px solid #00b894;
+}
+
+/* Essentials Grid */
+.essentials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.essential-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.essential-number {
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 184, 148, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  border: 2px solid #00b894;
+}
+
+/* Tips List */
+.tips-list {
+  list-style: none;
+  padding: 0;
+}
+
+.tips-list li {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px 20px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border-left: 4px solid #00b894;
+  text-align: left;
+}
+
+/* Policy Text */
+.policy-text {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 10px;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.policy-text h3 {
+  font-size: 1.2rem;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.policy-text ul {
+  padding-left: 20px;
+}
+
+.policy-text ul li {
+  margin: 8px 0;
+}
+
+/* Benefits List */
+.benefits-list {
+  list-style: none;
+  padding: 0;
+}
+
+.benefits-list li {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 12px 20px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border-left: 3px solid #00b894;
+}
+
+/* Filter Cards */
+.filters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
+}
+
+.filter-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;\n  transition: all 0.3s ease;\n}\n\n.filter-card:hover {\n  background: rgba(255, 255, 255, 0.15);\n  transform: translateY(-3px);\n}
+
+/* Job Categories */
+.job-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.job-category {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.job-category h3 {
+  margin-bottom: 10px;
+}
+
+.job-count {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #00b894;
+}
+
+/* Apply Steps */
+.apply-steps {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 25px;
+  border-radius: 10px;
+  border-left: 4px solid #00b894;
+  text-align: left;
+}
+
+.apply-steps li {
+  margin: 12px 0;
+  padding-left: 10px;
+}
+
+/* Support Channels */
+.support-channels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.support-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.support-card h4 {
+  margin-bottom: 10px;
+}
+
+/* Support Topics */
+.support-topics {
+  list-style: none;
+  padding: 0;
+}
+
+.support-topics li {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 12px 20px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border-left: 3px solid #00b894;
+}
+
+/* Terms Text */
+.terms-text {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 10px;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.terms-text h3 {
+  font-size: 1.1rem;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: #00b894;
+}
+
+/* FAQs List */
+.faqs-list {\n  display: grid;\n  gap: 20px;\n}\n\n.faq-item {\n  background: rgba(255, 255, 255, 0.1);\n  padding: 20px;\n  border-radius: 10px;\n  border: 1px solid rgba(255, 255, 255, 0.2);\n  text-align: left;\n}\n\n.faq-item h4 {\n  margin-bottom: 10px;\n  font-size: 1.1rem;  }\n\n/* Contact Options */\n.contact-options {\n  background: rgba(255, 255, 255, 0.1);\n  padding: 25px;\n  border-radius: 10px;\n  border: 1px solid rgba(255, 255, 255, 0.2);\n}\n\n.contact-options p {\n  margin: 10px 0;\n  font-size: 1.05rem;\n}\n\n/* Responsive */\n@media (max-width: 768px) {\n  .page-container h1 {\n    font-size: 1.8rem;\n  }\n\n  .content-section h2 {\n    font-size: 1.4rem;\n  }\n\n  .features-grid,\n  .platforms-grid,\n  .specialties-grid,\n  .filters-grid,\n  .job-categories-grid,\n  .support-channels-grid {\n    grid-template-columns: 1fr;\n  }\n}"

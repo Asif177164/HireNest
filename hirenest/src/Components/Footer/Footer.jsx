@@ -1,4 +1,5 @@
 import { FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import "./Footer.css";
 
 function Footer() {
@@ -21,10 +22,18 @@ function Footer() {
         <div className="footer-section">
           <h3>Categories</h3>
           <ul>
-            <li>Web Development</li>
-            <li>App Development</li>
-            <li>UI/UX Design</li>
-            <li>Marketing</li>
+            <li>
+              <Link to="/web-development">Web Development</Link>
+            </li>
+            <li>
+              <Link to="/app-development">App Development</Link>
+            </li>
+            <li>
+              <Link to="/ui-ux-design">UI/UX Design</Link>
+            </li>
+            <li>
+              <Link to="/marketing">Marketing</Link>
+            </li>
           </ul>
         </div>
 
@@ -32,9 +41,15 @@ function Footer() {
         <div className="footer-section">
           <h3>Clients</h3>
           <ul>
-            <li>Post a Project</li>
-            <li>Find Freelancers</li>
-            <li>How it Works</li>
+            <li>
+              <Link to="/post-project">Post a Project</Link>
+            </li>
+            <li>
+              <Link to="/find-freelancers">Find Freelancers</Link>
+            </li>
+            <li>
+              <Link to="/how-it-works">How it Works</Link>
+            </li>
           </ul>
         </div>
 
@@ -42,9 +57,15 @@ function Footer() {
         <div className="footer-section">
           <h3>Freelancers</h3>
           <ul>
-            <li>Create Profile</li>
-            <li>Find Jobs</li>
-            <li>Support</li>
+            <li>
+              <Link to="/create-profile">Create Profile</Link>
+            </li>
+            <li>
+              <Link to="/find-jobs">Find Jobs</Link>
+            </li>
+            <li>
+              <Link to="/support">Support</Link>
+            </li>
           </ul>
         </div>
       </div>
@@ -53,9 +74,9 @@ function Footer() {
       <div className="footer-bottom">
         <p>© 2026 Hirenest. All Rights Reserved.</p>
         <div className="footer-links">
-          <span>Privacy Policy</span>
-          <span>Terms of Service</span>
-          <span>Help</span>
+          <Link to="/privacy-policy">Privacy Policy</Link>
+          <Link to="/terms-of-service">Terms of Service</Link>
+          <Link to="/help">Help</Link>
         </div>
       </div>
     </footer>

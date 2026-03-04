@@ -1,5 +1,5 @@
 .footer {
-  background-color: #111;
+  background-color: #1e3a8a;
   color: white;
   padding: 40px 20px 10px;
 }
@@ -30,12 +30,13 @@
   padding: 0;
 }
 
-.footer-section ul li {
-  margin-bottom: 6px;
-  cursor: pointer;
+.footer-section ul li a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-.footer-section ul li:hover {
+.footer-section ul li a:hover {
   color: #00b894;
 }
 
@@ -61,11 +62,14 @@
   font-size: 14px;
 }
 
-.footer-links span {
+.footer-links a {
   margin-left: 15px;
   cursor: pointer;
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-.footer-links span:hover {
+.footer-links a:hover {
   color: #00b894;
 }
