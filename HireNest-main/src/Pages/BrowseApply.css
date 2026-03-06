@@ -1,0 +1,155 @@
+.browse-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #2d3748;
+}
+
+.browse-header {
+  text-align: center;
+  padding: 3rem 1rem;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  margin-bottom: 3rem;
+}
+
+.browse-header h1 {
+  font-size: 2.5rem;
+  color: #1a202c;
+  margin-bottom: 1rem;
+}
+
+.search-mockup {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 2rem 0 1rem;
+}
+
+.search-input {
+  width: 60%;
+  padding: 12px 20px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus {
+  border-color: #4299e1;
+}
+
+.search-btn {
+  background-color: #4299e1;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.filter-chips {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  background: #f7fafc;
+  border: 1px solid #edf2f7;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: #4a5568;
+  cursor: pointer;
+}
+
+.chip:hover {
+  background: #ebf8ff;
+  color: #3182ce;
+}
+
+.discovery-section {
+  margin-bottom: 4rem;
+}
+
+.section-info {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.filters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.filter-card {
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  transition: box-shadow 0.3s;
+}
+
+.filter-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.filter-card h4 {
+  color: #2b6cb0;
+  margin-bottom: 0.5rem;
+}
+
+.process-section {
+  background: #f8fafc;
+  padding: 3rem;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.process-steps {
+  display: flex;
+  justify-content: space-around;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.step {
+  flex: 1;
+  min-width: 200px;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  background: #3182ce;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  font-weight: bold;
+}
+
+.step h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.step p {
+  font-size: 0.9rem;
+  color: #718096;
+}
+
+@media (max-width: 768px) {
+  .search-input { width: 100%; }
+  .search-mockup { flex-direction: column; }
+}

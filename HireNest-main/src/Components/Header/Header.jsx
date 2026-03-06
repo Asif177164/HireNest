@@ -1,37 +1,8 @@
-import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useState } from "react";
 import logo from "../../assets/logo.png";
 import "./Header.css";
 
-const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp, user, setUser, isHomePage, setIsHomePage }) => {
-  const navigate = useNavigate();
-  const [pendingRedirect, setPendingRedirect] = useState(null);
-
-  useEffect(() => {
-    if (user && pendingRedirect) {
-      const redirectPath = pendingRedirect;
-      setPendingRedirect(null);
-      navigate(redirectPath);
-    }
-  }, [user, pendingRedirect, navigate]);
-
-  const handleExploreJobs = () => {
-    if (user) {
-      navigate("/browse-apply");
-    } else {
-      setPendingRedirect("/browse-apply");
-      setShowSignUp(true);
-    }
-  };
-
-  const handleAdminPanel = () => {
-    if (user) {
-      navigate("/admin-panel");
-    } else {
-      setPendingRedirect("/admin-panel");
-      setShowSignUp(true);
-    }
-  };
+const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp, user, setUser }) => {
   const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
   const [signInData, setSignInData] = useState({ username: "", password: "" });
@@ -117,30 +88,24 @@ const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp, user, se
     }
   };
 
-  const handleLogout = () => {
-    setPendingRedirect(null);
-    setUser(null);
-  };
-
   return (
     <>
-      <header className={isHomePage ? "header-home" : "header-page"}>
+      {/* ─── Header (sits on TOP of the hero background) ─── */}
+      <header>
         <div className="logo">
-          <Link to="/">
-            <img src={logo} alt="logo" />
-          </Link>
+          <img src={logo} alt="logo" />
         </div>
 
         <nav>
           <ul>
-            <li><Link to="/" className={isHomePage ? "" : "nav-link-page"}>Home</Link></li>
-            <li><span onClick={handleExploreJobs} style={{ cursor: "pointer" }} className={isHomePage ? "" : "nav-link-page"}>Explore Jobs</span></li>
-            <li><span onClick={handleAdminPanel} style={{ cursor: "pointer" }} className={isHomePage ? "" : "nav-link-page"}>Admin Panel</span></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Explore Jobs</a></li>
+            <li><a href="#">Admin Panel</a></li>
             {user ? (
               <>
                 <li className="nav-user">Hi, {user.firstName || user.username}</li>
                 <li>
-                  <button className="btn-logout" onClick={handleLogout}>
+                  <button className="btn-logout" onClick={() => setUser(null)}>
                     Logout
                   </button>
                 </li>
@@ -163,10 +128,12 @@ const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp, user, se
         </nav>
       </header>
 
+      {/* ─── Sign In Modal ─────────────────────────────── */}
       {showSignIn && (
         <div className="modal-overlay" onClick={() => setShowSignIn(false)}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
 
+            {/* Close button — stops propagation so overlay click doesn't fire too */}
             <button
               className="modal-close"
               onClick={(e) => { e.stopPropagation(); setShowSignIn(false); }}
