@@ -1,0 +1,120 @@
+.pj-master-wrapper {
+  display: block !important;
+  position: relative !important;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  min-height: auto !important;
+}
+
+.pj-hero {
+  background: linear-gradient(135deg, #1e3a8a 0%, #10b981 100%);
+  color: white;
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+.pj-hero-inner h1 {
+  font-size: 3.2rem;
+  margin-bottom: 1rem;
+  font-weight: 800;
+}
+
+.pj-hero-inner p {
+  font-size: 1.25rem;
+  max-width: 700px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+.pj-main-body {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.pj-info-section h2 {
+  font-size: 2.2rem;
+  color: #1e3a8a;
+  margin-bottom: 1rem;
+}
+
+.pj-info-section p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #4a5568;
+}
+
+.pj-label {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #10b981;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.pj-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.pj-card {
+  background: #f8fafc;
+  padding: 2.5rem;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.pj-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  border-color: #10b981;
+}
+
+.pj-card-num {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #e2e8f0;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+
+.pj-card h4 {
+  color: #1e3a8a;
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.pj-benefits-box {
+  background-color: #1e3a8a;
+  color: white;
+  padding: 3rem;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.pj-benefits-box h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.pj-benefits-box p {
+  max-width: 800px;
+  margin: 0 auto;
+  opacity: 0.85;
+}
+
+@media (max-width: 768px) {
+  .pj-hero-inner h1 { font-size: 2.2rem; }
+  .pj-main-body { padding: 2rem 1rem; }
+}

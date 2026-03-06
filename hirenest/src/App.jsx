@@ -3,6 +3,7 @@ import "./App.css";
 
 import Home from "./Components/Home/Home";
 import Footer from "./Components/Footer/Footer";
+import AIAssistance from "./Components/AIAssistance/AIAssistance";
 
 // Pages
 import WebDevelopment from "./Pages/WebDevelopment";
@@ -18,6 +19,12 @@ import FreelancerSupport from "./Pages/FreelancerSupport";
 import Privacy from "./Pages/Privacy";
 import TermsOfService from "./Pages/TermsOfService";
 import Help from "./Pages/Help";
+import PostJob from "./Pages/PostJob";
+import BrowseApply from "./Pages/BrowseApply";
+import Payments from "./Pages/Payments";
+import Chat from "./Pages/Chat";
+import Reviews from "./Pages/Reviews";
+import AIAssistant from "./Pages/AIAssistant";
 
 function App() {
   return (
@@ -37,10 +44,17 @@ function App() {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms-of-service" element={<TermsOfService />} />
         <Route path="/help" element={<Help />} />
+        <Route path="/post-job" element={<PostJob/>}/>
+        <Route path="/browse-apply" element={<BrowseApply/>}/>
+        <Route path="/payments" element={<Payments/>}/>
+        <Route path="/chat" element={<Chat/>}/>
+        <Route path="/reviews" element={<Reviews/>}/>
+        <Route path="/ai-assistant" element={<AIAssistant/>}/>
       </Routes>
 
       {/* Footer stays outside Routes so it shows on all pages */}
       <Footer />
+      <AIAssistance />
     </Router>
   );
 }
