@@ -4,6 +4,7 @@ import "./App.css";
 import Home from "./Components/Home/Home";
 import Footer from "./Components/Footer/Footer";
 import AIAssistance from "./Components/AIAssistance/AIAssistance";
+import Layout from "./Components/Layout/Layout";
 
 // Pages
 import WebDevelopment from "./Pages/WebDevelopment";
@@ -32,26 +33,26 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/web-development" element={<WebDevelopment />} />
-        <Route path="/app-development" element={<AppDevelopment />} />
-        <Route path="/ui-ux-design" element={<UIUXDesign />} />
-        <Route path="/marketing" element={<Marketing />} />
-        <Route path="/post-project" element={<PostProject />} />
-        <Route path="/find-freelancers" element={<FindFreelancers />} />
-        <Route path="/how-it-works" element={<HowItWorks />} />
-        <Route path="/create-profile" element={<CreateProfile />} />
-        <Route path="/find-jobs" element={<FindJobs />} />
-        <Route path="/support" element={<FreelancerSupport />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/terms-of-service" element={<TermsOfService />} />
-        <Route path="/help" element={<Help />} />
-        <Route path="/post-job" element={<PostJob/>}/>
-        <Route path="/browse-apply" element={<BrowseApply/>}/>
-        <Route path="/payments" element={<Payments/>}/>
-        <Route path="/chat" element={<Chat/>}/>
-        <Route path="/reviews" element={<Reviews/>}/>
-        <Route path="/ai-assistant" element={<AIAssistant/>}/>
-        <Route path="/admin-panel" element={<AdminPanel/>}/>
+        <Route path="/web-development" element={<Layout><WebDevelopment /></Layout>} />
+        <Route path="/app-development" element={<Layout><AppDevelopment /></Layout>} />
+        <Route path="/ui-ux-design" element={<Layout><UIUXDesign /></Layout>} />
+        <Route path="/marketing" element={<Layout><Marketing /></Layout>} />
+        <Route path="/post-project" element={<Layout><PostProject /></Layout>} />
+        <Route path="/find-freelancers" element={<Layout><FindFreelancers /></Layout>} />
+        <Route path="/how-it-works" element={<Layout><HowItWorks /></Layout>} />
+        <Route path="/create-profile" element={<Layout><CreateProfile /></Layout>} />
+        <Route path="/find-jobs" element={<Layout><FindJobs /></Layout>} />
+        <Route path="/support" element={<Layout><FreelancerSupport /></Layout>} />
+        <Route path="/privacy" element={<Layout><Privacy /></Layout>} />
+        <Route path="/terms-of-service" element={<Layout><TermsOfService /></Layout>} />
+        <Route path="/help" element={<Layout><Help /></Layout>} />
+        <Route path="/post-job" element={<Layout><PostJob /></Layout>}/>
+        <Route path="/browse-apply" element={<Layout><BrowseApply /></Layout>}/>
+        <Route path="/payments" element={<Layout><Payments /></Layout>}/>
+        <Route path="/chat" element={<Layout><Chat /></Layout>}/>
+        <Route path="/reviews" element={<Layout><Reviews /></Layout>}/>
+        <Route path="/ai-assistant" element={<Layout><AIAssistant /></Layout>}/>
+<Route path="/admin-panel" element={<Layout><AdminPanel /></Layout>}/>
       </Routes>
 
       {/* Footer stays outside Routes so it shows on all pages */}

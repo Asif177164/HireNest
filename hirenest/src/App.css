@@ -297,7 +297,7 @@
 
 @media (max-width: 576px) {
   .hero-content {
-    top: 20%;
+    top: 25%;
   }
   .hero-content h1 {
     font-size: 1.7rem;
@@ -326,12 +326,16 @@
 
 @media (max-width: 400px) {
   .hero-content {
-    top: 18%;
+    top: 30%;
   }
   .hero-content h1 {
     font-size: 1.5rem;
   }
   .hero-content p {
     font-size: 0.85rem;
+  }
+  
+  .button-group {
+    margin-top: 1rem;
   }
 }

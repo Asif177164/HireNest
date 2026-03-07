@@ -39,6 +39,20 @@ nav ul li a:hover {
   color: #10b981;
 }
 
+/* Unlogged state - span elements for Explore Jobs and Admin Panel */
+nav ul li span {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+nav ul li span:hover {
+  color: #10b981;
+}
+
 /* Buttons */
 .btn-signin,
 .btn-signup,
@@ -309,6 +323,167 @@ nav ul li a:hover {
   
   .role-selector {
     flex-direction: column;
+  }
+
+  /* Modal responsive for small screens */
+  .modal-card {
+    padding: 1.5rem;
+    margin: 1rem;
+    max-width: calc(100% - 2rem);
+  }
+
+  .modal-close {
+    top: 10px;
+    right: 10px;
+    font-size: 1.2rem;
+  }
+
+  .modal-icon {
+    font-size: 2rem;
+  }
+
+  .modal-card h2 {
+    font-size: 1.3rem;
+  }
+
+  .input-group input {
+    padding: 0.6rem 0.6rem 0.6rem 2.2rem;
+    font-size: 0.9rem;
+  }
+
+  .modal-btn {
+    padding: 0.7rem;
+    font-size: 0.9rem;
+  }
+
+  .role-btn {
+    padding: 0.8rem;
+  }
+
+  .role-icon {
+    font-size: 1.2rem;
+  }
+
+  .role-label {
+    font-size: 0.9rem;
+  }
+
+  .role-desc {
+    font-size: 0.7rem;
+  }
+}
+
+/* Extra small screens - iPhone SE */
+@media (max-width: 380px) {
+  header {
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 0.8rem;
+  }
+  
+  .logo img {
+    width: 120px;
+  }
+  
+  nav ul {
+    gap: 0.5rem;
+  }
+  
+  nav ul li a,
+  nav ul li span {
+    font-size: 0.8rem;
+  }
+  
+  .btn-signin,
+  .btn-signup,
+  .btn-logout {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+  }
+  
+  .nav-user {
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+  }
+  
+  .modal-card {
+    padding: 0.8rem;
+    margin: 0.5rem;
+    max-width: calc(100% - 1rem);
+    border-radius: 8px;
+  }
+
+  .modal-close {
+    top: 6px;
+    right: 6px;
+    font-size: 0.9rem;
+    padding: 3px;
+  }
+
+  .modal-icon {
+    font-size: 1.3rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .modal-card h2 {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .modal-subtitle {
+    font-size: 0.75rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .input-group {
+    margin-bottom: 0.4rem;
+  }
+
+  .input-group input {
+    padding: 0.45rem 0.45rem 0.45rem 1.8rem;
+    font-size: 0.8rem;
+    border-radius: 4px;
+  }
+
+  .input-icon {
+    font-size: 0.8rem;
+    left: 6px;
+  }
+
+  .modal-btn {
+    padding: 0.55rem;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    border-radius: 4px;
+  }
+
+  .role-selector {
+    gap: 0.4rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .role-btn {
+    padding: 0.5rem;
+    border-radius: 5px;
+  }
+
+  .role-icon {
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .role-label {
+    font-size: 0.75rem;
+  }
+
+  .role-desc {
+    font-size: 0.6rem;
+    display: none;
+  }
+
+  .modal-switch {
+    margin-top: 0.8rem;
+    font-size: 0.8rem;
   }
 }
 
