@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import "./Header.css";
 
-const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp }) => {
+const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp, user, setUser, isHome }) => {
+  const API_BASE = import.meta.env.VITE_API_URL || "/api";
+
   const [signInData, setSignInData] = useState({ username: "", password: "" });
   const [signUpData, setSignUpData] = useState({
     firstName: "", lastName: "", email: "", username: "",
@@ -19,15 +22,32 @@ const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp }) => {
     setSignUpData({ ...signUpData, [name]: value });
   };
 
-  const submitSignIn = (e) => {
+  const submitSignIn = async (e) => {
     e.preventDefault();
-    alert(`Signed In as ${signInData.username}`);
-    setShowSignIn(false);
-    setSignInData({ username: "", password: "" });
+
+    try {
+      const res = await fetch(`${API_BASE}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(signInData),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Sign in failed");
+      }
+
+      setUser(data);
+      setShowSignIn(false);
+      setSignInData({ username: "", password: "" });
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
-  const submitSignUp = (e) => {
+  const submitSignUp = async (e) => {
     e.preventDefault();
+
     if (!signUpData.role) {
       alert("Please select Job Seeker or Job Provider!");
       return;
@@ -36,37 +56,83 @@ const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp }) => {
       alert("Passwords do not match!");
       return;
     }
-    alert(`Signed Up as ${signUpData.username}`);
-    setShowSignUp(false);
-    setSignUpData({
-      firstName: "", lastName: "", email: "", username: "",
-      password: "", confirmPassword: "", role: ""
-    });
+
+    try {
+      const payload = {
+        firstName: signUpData.firstName,
+        lastName: signUpData.lastName,
+        email: signUpData.email,
+        username: signUpData.username,
+        password: signUpData.password,
+        role: signUpData.role,
+      };
+
+      const res = await fetch(`${API_BASE}/auth/register`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Sign up failed");
+      }
+
+      setUser(data);
+      setShowSignUp(false);
+      setSignUpData({
+        firstName: "", lastName: "", email: "", username: "",
+        password: "", confirmPassword: "", role: ""
+      });
+    } catch (error) {
+      alert(error.message);
+    }
   };
 
   return (
     <>
       {/* ─── Header (sits on TOP of the hero background) ─── */}
-      <header>
+      <header className={isHome ? "home-header" : ""}>
         <div className="logo">
           <img src={logo} alt="logo" />
         </div>
 
-        <nav>
+<nav>
           <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Explore Jobs</a></li>
-            <li><a href="#">Admin Panel</a></li>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/how-it-works">Explore Jobs</Link></li>
             <li>
-              <button className="btn-signin" onClick={() => setShowSignIn(true)}>
-                Sign In
-              </button>
+              {!user ? (
+                <span onClick={() => setShowSignUp(true)} style={{ cursor: "pointer" }}>
+                  Admin Panel
+                </span>
+              ) : (
+                <Link to="/admin-panel">Admin Panel</Link>
+              )}
             </li>
-            <li>
-              <button className="btn-signup" onClick={() => setShowSignUp(true)}>
-                Sign Up
-              </button>
-            </li>
+            {user ? (
+              <>
+                <li className="nav-user">Hi, {user.firstName || user.username}</li>
+                <li>
+                  <button className="btn-logout" onClick={() => setUser(null)}>
+                    Logout
+                  </button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <button className="btn-signin" onClick={() => setShowSignIn(true)}>
+                    Sign In
+                  </button>
+                </li>
+                <li>
+                  <button className="btn-signup" onClick={() => setShowSignUp(true)}>
+                    Sign Up
+                  </button>
+                </li>
+              </>
+            )}
           </ul>
         </nav>
       </header>

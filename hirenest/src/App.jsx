@@ -25,6 +25,7 @@ import Payments from "./Pages/Payments";
 import Chat from "./Pages/Chat";
 import Reviews from "./Pages/Reviews";
 import AIAssistant from "./Pages/AIAssistant";
+import AdminPanel from "./Pages/AdminPanel";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
         <Route path="/chat" element={<Chat/>}/>
         <Route path="/reviews" element={<Reviews/>}/>
         <Route path="/ai-assistant" element={<AIAssistant/>}/>
+        <Route path="/admin-panel" element={<AdminPanel/>}/>
       </Routes>
 
       {/* Footer stays outside Routes so it shows on all pages */}
