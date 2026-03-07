@@ -1,6 +1,15 @@
 /* global process */
-import dotenv from 'dotenv';
-import path from 'path';
+
+// Load environment variables FIRST before any other code
+import path from "path";
+import { fileURLToPath } from "url";
+import dotenv from "dotenv";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.join(__dirname, "config.env") });
+
 import express from "express";
 import cors from "cors";
 import bcrypt from "bcrypt";
@@ -9,7 +18,7 @@ import User from "./models/User.js";
 import aiRoutes from "./routes/aiRoutes.js";
 dotenv.config({ path: './config.env' });
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 app.use(cors());
 app.use(express.json());

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import "./Header.css";
 
-const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp, user, setUser, isHome }) => {
+const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp, user, setUser, isHome, className }) => {
   const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
   const [signInData, setSignInData] = useState({ username: "", password: "" });
@@ -37,7 +37,7 @@ const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp, user, se
         throw new Error(data.error || "Sign in failed");
       }
 
-      setUser(data);
+setUser(data);
       setShowSignIn(false);
       setSignInData({ username: "", password: "" });
     } catch (error) {
@@ -78,7 +78,7 @@ const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp, user, se
         throw new Error(data.error || "Sign up failed");
       }
 
-      setUser(data);
+setUser(data);
       setShowSignUp(false);
       setSignUpData({
         firstName: "", lastName: "", email: "", username: "",
@@ -92,7 +92,7 @@ const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp, user, se
   return (
     <>
       {/* ─── Header (sits on TOP of the hero background) ─── */}
-      <header className={isHome ? "home-header" : ""}>
+      <header className={className || (isHome ? "home-header" : "")}>
         <div className="logo">
           <img src={logo} alt="logo" />
         </div>
@@ -100,7 +100,15 @@ const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp, user, se
 <nav>
           <ul>
             <li><Link to="/">Home</Link></li>
-            <li><Link to="/how-it-works">Explore Jobs</Link></li>
+<li>
+              {!user ? (
+                <span onClick={() => setShowSignUp(true)} style={{ cursor: "pointer" }}>
+                  Explore Jobs
+                </span>
+              ) : (
+                <Link to="/browse-apply">Explore Jobs</Link>
+              )}
+            </li>
             <li>
               {!user ? (
                 <span onClick={() => setShowSignUp(true)} style={{ cursor: "pointer" }}>
@@ -110,7 +118,7 @@ const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp, user, se
                 <Link to="/admin-panel">Admin Panel</Link>
               )}
             </li>
-            {user ? (
+{user ? (
               <>
                 <li className="nav-user">Hi, {user.firstName || user.username}</li>
                 <li>
