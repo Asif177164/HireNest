@@ -1,14 +1,7 @@
 /* global process */
 
-// Load environment variables FIRST before any other code
-import path from "path";
-import { fileURLToPath } from "url";
-import dotenv from "dotenv";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-dotenv.config({ path: path.join(__dirname, "config.env") });
+// NOTE: This file is for your personal use (runs on port 5000)
+// It does NOT load from config.env to avoid port conflicts
 
 import express from "express";
 import cors from "cors";
@@ -16,9 +9,9 @@ import bcrypt from "bcrypt";
 import connectDB from "./connect.cjs";
 import User from "./models/User.js";
 import aiRoutes from "./routes/aiRoutes.js";
-dotenv.config({ path: './config.env' });
+
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = 5000; // Your personal port
 
 app.use(cors());
 app.use(express.json());
@@ -110,3 +103,4 @@ app.post("/api/auth/login", async (req, res) => {
     return res.status(500).json({ error: "Server error" });
   }
 });
+
