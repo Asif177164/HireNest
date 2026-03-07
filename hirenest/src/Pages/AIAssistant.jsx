@@ -1,8 +1,10 @@
 import "./AIAssistant.css";
+import { useAI } from "../Components/AIContext";
 
 function AIAssistant() {
+  const { setIsOpen } = useAI();
   const openChatbot = () => {
-    alert("The HireNest AI Chatbot is launching...");
+    setIsOpen(true);
   };
 
   return (

@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import { AIProvider } from "./Components/AIContext";
 
 import Home from "./Components/Home/Home";
 import Footer from "./Components/Footer/Footer";
@@ -30,7 +31,8 @@ import AdminPanel from "./Pages/AdminPanel";
 
 function App() {
   return (
-    <Router>
+    <AIProvider>
+      <Router>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/web-development" element={<Layout><WebDevelopment /></Layout>} />
@@ -59,6 +61,7 @@ function App() {
       <Footer />
       <AIAssistance />
     </Router>
+    </AIProvider>
   );
 }
 

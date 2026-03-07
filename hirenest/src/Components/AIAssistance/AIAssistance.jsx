@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { useAI } from "../AIContext";
 import "./AIAssistance.css";
 import { FaRobot, FaTimes, FaPaperPlane } from "react-icons/fa";
 
 function AIAssistance() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, setIsOpen } = useAI();
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([
     { role: "ai", text: "Hi! How can I help you with HireNest today?" }
@@ -19,7 +20,7 @@ function AIAssistance() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5001/api/ai/chat", {
+      const response = await fetch("http://localhost:5000/api/ai/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: input }),
