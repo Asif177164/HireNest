@@ -1,16 +1,20 @@
 /* global process */
-
+import dotenv from 'dotenv';
+import path from 'path';
 import express from "express";
 import cors from "cors";
 import bcrypt from "bcrypt";
 import connectDB from "./connect.cjs";
 import User from "./models/User.js";
-
+import aiRoutes from "./routes/aiRoutes.js";
+dotenv.config({ path: './config.env' });
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+app.use("/api/ai", aiRoutes);
+app.listen(PORT, () => console.log(`Server on http://localhost:${PORT}`));
 
 // Connect to MongoDB
 connectDB();
@@ -96,8 +100,4 @@ app.post("/api/auth/login", async (req, res) => {
     console.error("Login error:", error);
     return res.status(500).json({ error: "Server error" });
   }
-});
-
-app.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}`);
 });
