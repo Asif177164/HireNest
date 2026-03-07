@@ -49,7 +49,9 @@ const Home = () => {
             <button className="btn-getStarted" onClick={() => setShowSignUp(true)}>
               Get Started
             </button>
-            <button className="btn-learnmore">Learn More</button>
+            <Link to="/how-it-works">
+              <button className="btn-learnmore">Learn More</button>
+            </Link>
           </div>
         </div>
       </div>
