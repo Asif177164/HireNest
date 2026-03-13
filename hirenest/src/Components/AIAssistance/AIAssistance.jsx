@@ -6,28 +6,35 @@ function AIAssistance() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([
-    { role: "ai", text: "Hi! How can I help you with HireNest today?" }
+    { role: "ai", text: "Hi! How can I help you with HireNest today?" },
   ]);
   const [loading, setLoading] = useState(false);
 
   const handleChat = async () => {
     if (!input.trim()) return;
-    
+
     const userMsg = { role: "user", text: input };
-    setMessages(prev => [...prev, userMsg]);
+    setMessages((prev) => [...prev, userMsg]);
     setInput("");
     setLoading(true);
 
+    const token = localStorage.getItem("token");
+    const headers = { "Content-Type": "application/json" };
+    if (token) headers.Authorization = `Bearer ${token}`;
+
     try {
-      const response = await fetch("http://localhost:5000/api/ai/chat", {
+      const response = await fetch("/api/ai/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: input }),
       });
       const data = await response.json();
-      setMessages(prev => [...prev, { role: "ai", text: data.message }]);
+      setMessages((prev) => [...prev, { role: "ai", text: data.message }]);
     } catch (err) {
-      setMessages(prev => [...prev, { role: "ai", text: "Error connecting to AI." }]);
+      setMessages((prev) => [
+        ...prev,
+        { role: "ai", text: "Error connecting to AI." },
+      ]);
     } finally {
       setLoading(false);
     }
@@ -40,7 +47,10 @@ function AIAssistance() {
         <div className="ai-chat-window">
           <div className="ai-chat-header">
             <span>HireNest Assistant</span>
-            <FaTimes onClick={() => setIsOpen(false)} style={{cursor:'pointer'}} />
+            <FaTimes
+              onClick={() => setIsOpen(false)}
+              style={{ cursor: "pointer" }}
+            />
           </div>
           <div className="ai-chat-body">
             {messages.map((msg, i) => (
@@ -51,13 +61,15 @@ function AIAssistance() {
             {loading && <div className="chat-bubble ai">Typing...</div>}
           </div>
           <div className="ai-chat-footer">
-            <input 
-              value={input} 
+            <input
+              value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask anything..."
-              onKeyPress={(e) => e.key === 'Enter' && handleChat()}
+              onKeyPress={(e) => e.key === "Enter" && handleChat()}
             />
-            <button onClick={handleChat}><FaPaperPlane /></button>
+            <button onClick={handleChat}>
+              <FaPaperPlane />
+            </button>
           </div>
         </div>
       )}
@@ -65,7 +77,9 @@ function AIAssistance() {
       {/* Hovering Button */}
       <div className="ai-assist" onClick={() => !isOpen && setIsOpen(true)}>
         <div className="ai-content">
-          <div className="ai-icon"><FaRobot /></div>
+          <div className="ai-icon">
+            <FaRobot />
+          </div>
           <div className="ai-text">
             <strong>AI Assistance</strong>
             <p>Need help? Ask our assistant.</p>

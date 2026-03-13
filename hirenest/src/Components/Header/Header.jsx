@@ -3,13 +3,27 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import "./Header.css";
 
-const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp, user, setUser, isHome, className }) => {
+const Header = ({
+  showSignIn,
+  setShowSignIn,
+  showSignUp,
+  setShowSignUp,
+  user,
+  setUser,
+  isHome,
+  className,
+}) => {
   const API_BASE = import.meta.env.VITE_API_URL || "/api";
 
   const [signInData, setSignInData] = useState({ username: "", password: "" });
   const [signUpData, setSignUpData] = useState({
-    firstName: "", lastName: "", email: "", username: "",
-    password: "", confirmPassword: "", role: ""
+    firstName: "",
+    lastName: "",
+    email: "",
+    username: "",
+    password: "",
+    confirmPassword: "",
+    role: "",
   });
 
   const handleSignInChange = (e) => {
@@ -37,7 +51,8 @@ const Header = ({ showSignIn, setShowSignIn, showSignUp, setShowSignUp, user, se
         throw new Error(data.error || "Sign in failed");
       }
 
-setUser(data);
+      localStorage.setItem("token", data.token);
+      setUser(data);
       setShowSignIn(false);
       setSignInData({ username: "", password: "" });
     } catch (error) {
@@ -78,11 +93,17 @@ setUser(data);
         throw new Error(data.error || "Sign up failed");
       }
 
-setUser(data);
+      localStorage.setItem("token", data.token);
+      setUser(data);
       setShowSignUp(false);
       setSignUpData({
-        firstName: "", lastName: "", email: "", username: "",
-        password: "", confirmPassword: "", role: ""
+        firstName: "",
+        lastName: "",
+        email: "",
+        username: "",
+        password: "",
+        confirmPassword: "",
+        role: "",
       });
     } catch (error) {
       alert(error.message);
@@ -97,12 +118,17 @@ setUser(data);
           <img src={logo} alt="logo" />
         </div>
 
-<nav>
+        <nav>
           <ul>
-            <li><Link to="/">Home</Link></li>
-<li>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
               {!user ? (
-                <span onClick={() => setShowSignUp(true)} style={{ cursor: "pointer" }}>
+                <span
+                  onClick={() => setShowSignUp(true)}
+                  style={{ cursor: "pointer" }}
+                >
                   Explore Jobs
                 </span>
               ) : (
@@ -111,18 +137,29 @@ setUser(data);
             </li>
             <li>
               {!user ? (
-                <span onClick={() => setShowSignUp(true)} style={{ cursor: "pointer" }}>
+                <span
+                  onClick={() => setShowSignUp(true)}
+                  style={{ cursor: "pointer" }}
+                >
                   Admin Panel
                 </span>
               ) : (
                 <Link to="/admin-panel">Admin Panel</Link>
               )}
             </li>
-{user ? (
+            {user ? (
               <>
-                <li className="nav-user">Hi, {user.firstName || user.username}</li>
+                <li className="nav-user">
+                  Hi, {user.firstName || user.username}
+                </li>
                 <li>
-                  <button className="btn-logout" onClick={() => setUser(null)}>
+                  <button
+                    className="btn-logout"
+                    onClick={() => {
+                      localStorage.removeItem("token");
+                      setUser(null);
+                    }}
+                  >
                     Logout
                   </button>
                 </li>
@@ -130,12 +167,18 @@ setUser(data);
             ) : (
               <>
                 <li>
-                  <button className="btn-signin" onClick={() => setShowSignIn(true)}>
+                  <button
+                    className="btn-signin"
+                    onClick={() => setShowSignIn(true)}
+                  >
                     Sign In
                   </button>
                 </li>
                 <li>
-                  <button className="btn-signup" onClick={() => setShowSignUp(true)}>
+                  <button
+                    className="btn-signup"
+                    onClick={() => setShowSignUp(true)}
+                  >
                     Sign Up
                   </button>
                 </li>
@@ -149,11 +192,13 @@ setUser(data);
       {showSignIn && (
         <div className="modal-overlay" onClick={() => setShowSignIn(false)}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-
             {/* Close button — stops propagation so overlay click doesn't fire too */}
             <button
               className="modal-close"
-              onClick={(e) => { e.stopPropagation(); setShowSignIn(false); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowSignIn(false);
+              }}
             >
               ✕
             </button>
@@ -191,7 +236,12 @@ setUser(data);
 
             <p className="modal-switch">
               Don't have an account?{" "}
-              <span onClick={() => { setShowSignIn(false); setShowSignUp(true); }}>
+              <span
+                onClick={() => {
+                  setShowSignIn(false);
+                  setShowSignUp(true);
+                }}
+              >
                 Sign Up
               </span>
             </p>
@@ -203,10 +253,12 @@ setUser(data);
       {showSignUp && (
         <div className="modal-overlay" onClick={() => setShowSignUp(false)}>
           <div className="modal-card" onClick={(e) => e.stopPropagation()}>
-
             <button
               className="modal-close"
-              onClick={(e) => { e.stopPropagation(); setShowSignUp(false); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowSignUp(false);
+              }}
             >
               ✕
             </button>
@@ -266,7 +318,9 @@ setUser(data);
                 <button
                   type="button"
                   className={`role-btn ${signUpData.role === "jobSeeker" ? "role-btn--active" : ""}`}
-                  onClick={() => setSignUpData({ ...signUpData, role: "jobSeeker" })}
+                  onClick={() =>
+                    setSignUpData({ ...signUpData, role: "jobSeeker" })
+                  }
                 >
                   <span className="role-icon">🔍</span>
                   <span className="role-label">Job Seeker</span>
@@ -275,7 +329,9 @@ setUser(data);
                 <button
                   type="button"
                   className={`role-btn ${signUpData.role === "jobProvider" ? "role-btn--active" : ""}`}
-                  onClick={() => setSignUpData({ ...signUpData, role: "jobProvider" })}
+                  onClick={() =>
+                    setSignUpData({ ...signUpData, role: "jobProvider" })
+                  }
                 >
                   <span className="role-icon">🏢</span>
                   <span className="role-label">Job Provider</span>
@@ -314,7 +370,12 @@ setUser(data);
 
             <p className="modal-switch">
               Already have an account?{" "}
-              <span onClick={() => { setShowSignUp(false); setShowSignIn(true); }}>
+              <span
+                onClick={() => {
+                  setShowSignUp(false);
+                  setShowSignIn(true);
+                }}
+              >
                 Sign In
               </span>
             </p>

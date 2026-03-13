@@ -1,11 +1,16 @@
 import "./Pages.css";
 
+import { useEffect, useState } from "react";
+
 function WebDevelopment() {
-  const developers = [
-    { name: "React Specialist", rating: 4.9, projects: 150 },
-    { name: "Full Stack Developer", rating: 4.8, projects: 120 },
-    { name: "Node.js Expert", rating: 4.7, projects: 95 },
-  ];
+  const [developers, setDevelopers] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/services/web-development")
+      .then((res) => res.json())
+      .then((data) => setDevelopers(data.developers || []))
+      .catch((err) => console.error("Failed to load web dev data", err));
+  }, []);
 
   return (
     <div className="page-container">

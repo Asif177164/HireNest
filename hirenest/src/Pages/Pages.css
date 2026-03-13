@@ -209,25 +209,25 @@
   .page-container {
     padding: 60px 40px;
   }
-  
+
   .page-container h1 {
     font-size: 3.5rem;
   }
-  
+
   .intro-text {
     font-size: 1.4rem;
     max-width: 800px;
   }
-  
+
   .content-section {
     max-width: 1400px;
     margin: 60px 0;
   }
-  
+
   .content-section h2 {
     font-size: 2.5rem;
   }
-  
+
   .feature-card,
   .developer-card,
   .platform-card,
@@ -239,12 +239,12 @@
   .filter-card {
     padding: 35px;
   }
-  
+
   .complaint-card-modern {
     max-width: 900px;
     padding: 50px;
   }
-  
+
   .success-message-modern {
     max-width: 800px;
     padding: 60px;
@@ -256,25 +256,25 @@
   .page-container {
     padding: 80px 60px;
   }
-  
+
   .page-container h1 {
     font-size: 4rem;
   }
-  
+
   .intro-text {
     font-size: 1.6rem;
     max-width: 1000px;
   }
-  
+
   .content-section {
     max-width: 1600px;
     margin: 80px 0;
   }
-  
+
   .content-section h2 {
     font-size: 3rem;
   }
-  
+
   .feature-card,
   .developer-card,
   .platform-card,
@@ -286,44 +286,44 @@
   .filter-card {
     padding: 45px;
   }
-  
+
   .feature-card h3 {
     font-size: 1.8rem;
   }
-  
+
   .feature-card p {
     font-size: 1.2rem;
   }
-  
+
   .complaint-card-modern {
     max-width: 1000px;
     padding: 60px;
   }
-  
+
   .complaint-header-modern h2 {
     font-size: 2rem;
   }
-  
+
   .complaint-textarea {
     min-height: 200px;
     font-size: 1.1rem;
   }
-  
+
   .btn-modern-primary,
   .btn-modern-secondary {
     padding: 18px 36px;
     font-size: 1.15rem;
   }
-  
+
   .success-message-modern {
     max-width: 900px;
     padding: 70px;
   }
-  
+
   .success-message-modern h2 {
     font-size: 2rem;
   }
-  
+
   .success-message-modern p {
     font-size: 1.2rem;
   }
@@ -514,7 +514,8 @@
 }
 
 @keyframes pulse {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {

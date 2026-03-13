@@ -4,16 +4,48 @@ import "./Pages.css";
 function AdminPanel() {
   const [complaint, setComplaint] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setComplaint(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Complaint submitted:", complaint);
-    setSubmitted(true);
-    setComplaint("");
+    setLoading(true);
+    setError("");
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setError("Please login first");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/complaints/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ complaintText: complaint }),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        setComplaint("");
+      } else {
+        const errorData = await response.json();
+        setError(errorData.error || "Failed to submit complaint");
+      }
+    } catch (error) {
+      console.error("Error submitting complaint:", error);
+      setError("Network error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -27,10 +59,16 @@ function AdminPanel() {
         <div className="success-message-modern">
           <div className="success-icon-modern">✓</div>
           <h2>Complaint Submitted Successfully!</h2>
-          <p>Thank you for your feedback. We will review your complaint and get back to you soon.</p>
-          <button 
-            className="btn-modern-primary" 
-            onClick={() => setSubmitted(false)}
+          <p>
+            Thank you for your feedback. We will review your complaint and get
+            back to you soon.
+          </p>
+          <button
+            className="btn-modern-primary"
+            onClick={() => {
+              setSubmitted(false);
+              setError("");
+            }}
           >
             Submit Another Complaint
           </button>
@@ -42,10 +80,15 @@ function AdminPanel() {
               <div className="complaint-icon-modern">📝</div>
               <div>
                 <h2>Submit Your Complaint</h2>
-                <p className="complaint-subtitle">We value your feedback and are here to help</p>
+                <p className="complaint-subtitle">
+                  We value your feedback and are here to help
+                </p>
               </div>
             </div>
             <form onSubmit={handleSubmit} className="complaint-form-modern">
+              {error && (
+                <p style={{ color: "red", marginBottom: "10px" }}>{error}</p>
+              )}
               <div className="textarea-wrapper-modern">
                 <textarea
                   value={complaint}
@@ -55,15 +98,26 @@ function AdminPanel() {
                   required
                   className="complaint-textarea"
                 />
-                <span className="textarea-char-count">{complaint.length} characters</span>
+                <span className="textarea-char-count">
+                  {complaint.length} characters
+                </span>
               </div>
 
               <div className="complaint-actions">
-                <button type="submit" className="btn-modern-primary">
+                <button
+                  type="submit"
+                  className="btn-modern-primary"
+                  disabled={loading}
+                >
                   <span className="btn-icon">✈️</span>
-                  Submit Complaint
+                  {loading ? "Submitting..." : "Submit Complaint"}
                 </button>
-                <button type="button" className="btn-modern-secondary" onClick={() => setComplaint("")}>
+                <button
+                  type="button"
+                  className="btn-modern-secondary"
+                  onClick={() => setComplaint("")}
+                  disabled={loading}
+                >
                   Clear
                 </button>
               </div>
@@ -94,4 +148,3 @@ function AdminPanel() {
 }
 
 export default AdminPanel;
-

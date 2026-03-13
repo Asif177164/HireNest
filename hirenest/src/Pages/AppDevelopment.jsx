@@ -1,13 +1,20 @@
 import "./Pages.css";
 
+import { useEffect, useState } from "react";
+
 function AppDevelopment() {
-  console.log("AppDevelopment rendered");
-  const platforms = [
-    { name: "iOS Development", icon: "📱" },
-    { name: "Android Development", icon: "🤖" },
-    { name: "Cross-Platform (React Native)", icon: "⚛️" },
-    { name: "Flutter Development", icon: "🎯" },
-  ];
+  const [platforms, setPlatforms] = useState([]);
+  const [benefits, setBenefits] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/services/app-development")
+      .then((res) => res.json())
+      .then((data) => {
+        setPlatforms(data.platforms || []);
+        setBenefits(data.benefits || []);
+      })
+      .catch((err) => console.error("Failed to load app dev data", err));
+  }, []);
 
   return (
     <div className="page-container">
@@ -32,10 +39,9 @@ function AppDevelopment() {
       <div className="content-section">
         <h2>Why Choose Our Developers?</h2>
         <ul className="benefits-list">
-          <li>✓ Experienced in latest mobile frameworks</li>
-          <li>✓ Portfolio of successful apps in app stores</li>
-          <li>✓ Fast deployment and iteration</li>
-          <li>✓ 24/7 support and maintenance</li>
+          {benefits.map((item, index) => (
+            <li key={index}>✓ {item}</li>
+          ))}
         </ul>
       </div>
     </div>
