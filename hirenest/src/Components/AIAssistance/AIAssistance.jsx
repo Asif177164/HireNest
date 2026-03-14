@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import { useAI } from "../AIContext";
 import "./AIAssistance.css";
 import { FaRobot, FaTimes, FaPaperPlane } from "react-icons/fa";
 
 function AIAssistance() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isOpen, setIsOpen } = useAI();
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([
     { role: "ai", text: "Hi! How can I help you with HireNest today?" },

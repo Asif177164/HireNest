@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "server": "node server/index.js",
+    "server:user": "node server/index_user.js",
     "server:db": "node server/connect.cjs"
   },
   "dependencies": {
