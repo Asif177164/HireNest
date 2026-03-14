@@ -5,12 +5,14 @@ const mongoose = require("mongoose");
 const connectDB = async () => {
   try {
     await mongoose.connect(
-      process.env.MONGODB_URI || "mongodb://localhost:27017/hirenest"
+      process.env.MONGODB_URI || "mongodb://localhost:27017/hirenest",
     );
     console.log("MongoDB connected successfully");
   } catch (error) {
+    // log error but do not terminate process; front-end services are static and
+    // the application should still respond to API requests during development
     console.error("MongoDB connection failed:", error.message);
-    process.exit(1);
+    // process.exit(1);
   }
 };
 

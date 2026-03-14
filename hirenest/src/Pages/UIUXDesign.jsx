@@ -1,14 +1,20 @@
 import "./Pages.css";
 
+import { useEffect, useState } from "react";
+
 function UIUXDesign() {
-  const services = [
-    "Web UI Design",
-    "Mobile App UI",
-    "Wireframing & Prototyping",
-    "User Research",
-    "Interaction Design",
-    "Design Systems",
-  ];
+  const [services, setServices] = useState([]);
+  const [process, setProcess] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/services/ui-ux-design")
+      .then((res) => res.json())
+      .then((data) => {
+        setServices(data.services || []);
+        setProcess(data.process || []);
+      })
+      .catch((err) => console.error("Failed to load UI/UX data", err));
+  }, []);
 
   return (
     <div className="page-container">
@@ -32,11 +38,9 @@ function UIUXDesign() {
       <div className="content-section">
         <h2>Design Process</h2>
         <ol className="process-list">
-          <li>Discovery & Research</li>
-          <li>Wireframing & Prototyping</li>
-          <li>Visual Design</li>
-          <li>User Testing & Feedback</li>
-          <li>Final Delivery & Support</li>
+          {process.map((step, index) => (
+            <li key={index}>{step}</li>
+          ))}
         </ol>
       </div>
     </div>
