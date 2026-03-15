@@ -1,31 +1,44 @@
 /* global process */
 
-// NOTE: This file is for your personal use (runs on port 5000)
-// It does NOT load from config.env to avoid port conflicts
-
+import path from "path";
+import { fileURLToPath } from "url";
+import dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
 import connectDB from "./connect.cjs";
 import User from "./models/User.js";
+import { sendVerificationEmail } from "./utils/emailService.js";
 import aiRoutes from "./routes/aiRoutes.js";
+import complaintRoutes from "./routes/complaintRoutes.js";
+import verifyToken from "./middleware/auth.js";
+
+dotenv.config(); // Load environment variables from .env
 
 const app = express();
-const PORT = 5000; // Your personal port
+const PORT = process.env.PORT || 5003; // use env port if available
 
 app.use(cors());
 app.use(express.json());
 app.use("/api/ai", aiRoutes);
-app.listen(PORT, () => console.log(`Server on http://localhost:${PORT}`));
+app.use("/api/complaints", complaintRoutes);
 
-// Connect to MongoDB
-connectDB();
-
-// Basic health check
+// Health check
 app.get("/api/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
+// Connect to MongoDB
+connectDB();
+
+// Secret key for JWT
+const JWT_SECRET =
+  process.env.JWT_SECRET ||
+  "your-super-secret-jwt-key-change-in-production-12345";
+
+// ----------------- REGISTER -----------------
 app.post("/api/auth/register", async (req, res) => {
   const { firstName, lastName, email, username, password, role } = req.body;
 
@@ -63,13 +76,20 @@ app.post("/api/auth/register", async (req, res) => {
       role: user.role,
     };
 
-    return res.status(201).json(safeUser);
+    // Optional: generate token on registration
+    const token = jwt.sign(safeUser, JWT_SECRET, { expiresIn: "1h" });
+
+    // Optionally send verification email
+    // await sendVerificationEmail(user.email, token);
+
+    return res.status(201).json({ user: safeUser, token });
   } catch (error) {
     console.error("Register error:", error);
     return res.status(500).json({ error: "Server error" });
   }
 });
 
+// ----------------- LOGIN -----------------
 app.post("/api/auth/login", async (req, res) => {
   const { username, password } = req.body;
 
@@ -97,10 +117,23 @@ app.post("/api/auth/login", async (req, res) => {
       role: user.role,
     };
 
-    return res.json(safeUser);
+    // Generate JWT
+    const token = jwt.sign(safeUser, JWT_SECRET, { expiresIn: "1h" });
+
+    return res.json({ user: safeUser, token });
   } catch (error) {
     console.error("Login error:", error);
     return res.status(500).json({ error: "Server error" });
   }
 });
 
+// ----------------- PROTECTED ROUTE EXAMPLE -----------------
+app.get("/api/protected", verifyToken, (req, res) => {
+  // verifyToken adds req.user
+  res.json({ message: "Access granted", user: req.user });
+});
+
+// ----------------- START SERVER -----------------
+app.listen(PORT, () =>
+  console.log(`Server running on http://localhost:${PORT}`),
+);

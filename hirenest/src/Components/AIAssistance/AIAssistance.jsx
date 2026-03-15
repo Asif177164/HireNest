@@ -19,19 +19,31 @@ function AIAssistance() {
     setInput("");
     setLoading(true);
 
-    const token = localStorage.getItem("token");
-    const headers = { "Content-Type": "application/json" };
-    if (token) headers.Authorization = `Bearer ${token}`;
-
     try {
+      const token = localStorage.getItem("token"); // JWT token
+      const headers = { "Content-Type": "application/json" };
+      if (token) headers.Authorization = `Bearer ${token}`;
+
       const response = await fetch("/api/ai/chat", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers,
         body: JSON.stringify({ prompt: input }),
       });
+
+      if (response.status === 401) {
+        // Token missing/expired
+        setMessages((prev) => [
+          ...prev,
+          { role: "ai", text: "Unauthorized! Please log in again." },
+        ]);
+        setLoading(false);
+        return;
+      }
+
       const data = await response.json();
       setMessages((prev) => [...prev, { role: "ai", text: data.message }]);
     } catch (err) {
+      console.error(err);
       setMessages((prev) => [
         ...prev,
         { role: "ai", text: "Error connecting to AI." },
