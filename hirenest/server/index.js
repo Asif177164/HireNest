@@ -36,6 +36,125 @@ connectDB();
 app.use("/api/ai", aiRoutes);
 app.use("/api/complaints", complaintRoutes);
 
+/* =========================
+   ADMIN ROUTES
+========================= */
+
+// Get all users (admin only)
+app.get("/api/admin/users", async (req, res) => {
+  try {
+    const users = await User.find().select("-passwordHash -verificationToken");
+    res.json(users);
+  } catch (error) {
+    console.error("Get users error:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// Get admin statistics
+app.get("/api/admin/stats", async (req, res) => {
+  try {
+    const Complaint = (await import("./models/Complaint.js")).default;
+    
+    const totalUsers = await User.countDocuments();
+    const totalComplaints = await Complaint.countDocuments();
+    const pendingComplaints = await Complaint.countDocuments({ status: "pending" });
+    const resolvedComplaints = await Complaint.countDocuments({ status: "resolved" });
+
+    res.json({
+      totalUsers,
+      totalComplaints,
+      pendingComplaints,
+      resolvedComplaints,
+    });
+  } catch (error) {
+    console.error("Get stats error:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// Update complaint status (admin only)
+app.patch("/api/complaints/:id/status", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status, resolutionMessage } = req.body;
+    const Complaint = (await import("./models/Complaint.js")).default;
+
+    if (!["pending", "resolved"].includes(status)) {
+      return res.status(400).json({ error: "Invalid status" });
+    }
+
+    const updateData = { status };
+    if (resolutionMessage) {
+      updateData.resolutionMessage = resolutionMessage;
+    }
+
+    const complaint = await Complaint.findByIdAndUpdate(
+      id,
+      updateData,
+      { new: true }
+    );
+
+    if (!complaint) {
+      return res.status(404).json({ error: "Complaint not found" });
+    }
+
+    res.json(complaint);
+  } catch (error) {
+    console.error("Update complaint status error:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// Get all complaints (admin only)
+app.get("/api/complaints/all", async (req, res) => {
+  try {
+    const Complaint = (await import("./models/Complaint.js")).default;
+    const complaints = await Complaint.find()
+      .populate("userId", "firstName lastName email username")
+      .sort({ createdAt: -1 });
+    res.json(complaints);
+  } catch (error) {
+    console.error("Get all complaints error:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// Delete user (admin only)
+app.delete("/api/admin/users/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findByIdAndDelete(id);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json({ message: "User deleted successfully" });
+  } catch (error) {
+    console.error("Delete user error:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+// Delete complaint (admin only)
+app.delete("/api/complaints/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const Complaint = (await import("./models/Complaint.js")).default;
+    const complaint = await Complaint.findByIdAndDelete(id);
+
+    if (!complaint) {
+      return res.status(404).json({ error: "Complaint not found" });
+    }
+
+    res.json({ message: "Complaint deleted successfully" });
+  } catch (error) {
+    console.error("Delete complaint error:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 /* Health check */
 app.get("/api/health", (req, res) => {
   res.json({ status: "Server running" });
