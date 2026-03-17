@@ -1,10 +1,8 @@
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET =
-  process.env.JWT_SECRET ||
-  "your-super-secret-jwt-key-change-in-production-12345"; // TODO: Add to config.env
+const JWT_SECRET = process.env.JWT_SECRET || "supersecretjwtkey";
 
-export const verifyToken = async (req, res, next) => {
+export const verifyToken = (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -12,12 +10,8 @@ export const verifyToken = async (req, res, next) => {
     }
 
     const token = authHeader.split(" ")[1];
-    if (!token) {
-      return res.status(401).json({ error: "Invalid token format" });
-    }
-
     const decoded = jwt.verify(token, JWT_SECRET);
-    req.user = decoded; // { id, role }
+    req.user = decoded;
     next();
   } catch (error) {
     console.error("Token verification error:", error);
@@ -25,5 +19,4 @@ export const verifyToken = async (req, res, next) => {
   }
 };
 
-// Export for convenience
 export default verifyToken;
