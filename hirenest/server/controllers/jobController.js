@@ -30,9 +30,10 @@ export const createJob = async (req, res) => {
 // Get all jobs (with optional filtering)
 export const getJobs = async (req, res) => {
   try {
-    const { jobField } = req.query;
+    const { jobField, includeAll } = req.query;
     
-    let query = { status: 'open' };
+    // If includeAll is true, get all jobs (for admin), otherwise only open jobs
+    let query = includeAll === 'true' ? {} : { status: 'open' };
     
     // If jobField is provided, filter by it
     if (jobField && jobField !== 'All') {
@@ -40,7 +41,7 @@ export const getJobs = async (req, res) => {
     }
 
     const jobs = await Job.find(query)
-      .populate('postedBy', 'firstName lastName username')
+      .populate('postedBy', 'firstName lastName username email')
       .sort({ createdAt: -1 });
 
     res.json(jobs);
@@ -176,6 +177,26 @@ export const closeJob = async (req, res) => {
     res.json({ message: 'Job closed successfully', job });
   } catch (error) {
     console.error('Close job error:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+// Delete a job (admin only)
+export const deleteJob = async (req, res) => {
+  try {
+    const { jobId } = req.params;
+    
+    const job = await Job.findById(jobId);
+    
+    if (!job) {
+      return res.status(404).json({ error: 'Job not found' });
+    }
+
+    await Job.findByIdAndDelete(jobId);
+
+    res.json({ message: 'Job deleted successfully' });
+  } catch (error) {
+    console.error('Delete job error:', error);
     res.status(500).json({ error: 'Server error' });
   }
 };
