@@ -124,11 +124,14 @@ function AdminJobs() {
 
       <div style={{ 
         display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
+        gridTemplateColumns: 'repeat(3, 1fr)', 
         gap: '20px', 
         marginBottom: '40px',
-        maxWidth: '800px'
-      }}>
+        width: '100%',
+        maxWidth: '900px'
+      }}
+      className="jobs-stats-grid"
+      >
         <div className="filter-card" style={{ textAlign: 'center', padding: '25px' }}>
           <span style={{ display: 'block', fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--primary-green)' }}>{jobs.length}</span>
           <span style={{ color: 'var(--text-secondary)' }}>Total Jobs</span>
