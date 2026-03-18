@@ -70,6 +70,132 @@ header {
   }
 }
 
+/* Targeted media queries for iPhone XR (414px), iPhone 12 Pro (390px), Pixel 3 (393px) */
+@media screen and (min-width: 381px) and (max-width: 420px) {
+  header {
+    padding: 1rem 4%;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  
+  .logo img {
+    width: 130px;
+  }
+  
+  nav {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+  
+  nav ul {
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  
+  nav ul li a,
+  nav ul li span {
+    font-size: 0.76rem;
+  }
+  
+  .btn-signin,
+  .btn-signup,
+  .btn-logout {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.7rem;
+    white-space: nowrap;
+  }
+  
+  .nav-user {
+    font-size: 0.7rem;
+    margin-right: 0.3rem;
+  }
+}
+
+/* Specific iPhone 12 Pro and similar (390px-396px) */
+@media screen and (min-width: 388px) and (max-width: 396px) {
+  header {
+    padding: 0.85rem 3.5%;
+    gap: 0.65rem;
+  }
+  
+  .logo img {
+    width: 122px;
+  }
+  
+  nav ul {
+    gap: 0.45rem;
+  }
+  
+  nav ul li a,
+  nav ul li span {
+    font-size: 0.73rem;
+  }
+  
+  .btn-signin,
+  .btn-signup,
+  .btn-logout {
+    padding: 0.38rem 0.65rem;
+    font-size: 0.68rem;
+  }
+}
+
+/* iPhone XR specific (414px) */
+@media screen and (min-width: 410px) and (max-width: 418px) {
+  header {
+    padding: 0.95rem 4%;
+    gap: 0.8rem;
+  }
+  
+  .logo img {
+    width: 135px;
+  }
+  
+  nav ul {
+    gap: 0.55rem;
+  }
+  
+  nav ul li a,
+  nav ul li span {
+    font-size: 0.78rem;
+  }
+  
+  .btn-signin,
+  .btn-signup,
+  .btn-logout {
+    padding: 0.45rem 0.8rem;
+    font-size: 0.73rem;
+  }
+}
+
+/* Pixel 3 specific (393px) */
+@media screen and (min-width: 391px) and (max-width: 395px) {
+  header {
+    padding: 0.9rem 3.5%;
+    gap: 0.7rem;
+  }
+  
+  .logo img {
+    width: 128px;
+  }
+  
+  nav ul {
+    gap: 0.5rem;
+  }
+  
+  nav ul li a,
+  nav ul li span {
+    font-size: 0.75rem;
+  }
+  
+  .btn-signin,
+  .btn-signup,
+  .btn-logout {
+    padding: 0.42rem 0.7rem;
+    font-size: 0.7rem;
+  }
+}
+
 @media screen and (max-width: 320px) {
   header {
     padding: 0.6rem 2%;

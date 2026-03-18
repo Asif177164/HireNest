@@ -45,17 +45,23 @@ function Layout({ children }) {
         }
         @media (max-width: 768px) {
           .layout-content {
-            padding-top: 70px;
+            padding-top: 85px;
           }
         }
         @media (max-width: 480px) {
           .layout-content {
-            padding-top: 60px;
+            padding-top: 90px;
+          }
+        }
+        /* iPhone XR (414px), iPhone 12 Pro (390px), Pixel 3 (393px) */
+        @media screen and (min-width: 381px) and (max-width: 420px) {
+          .layout-content {
+            padding-top: 100px;
           }
         }
         @media (max-width: 320px) {
           .layout-content {
-            padding-top: 55px;
+            padding-top: 95px;
           }
         }
       `}</style>
