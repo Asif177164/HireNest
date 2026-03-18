@@ -154,6 +154,8 @@ const Header = ({
             <li><Link to="/">Home</Link></li>
             <li>{!user ? (
               <span onClick={() => setShowSignUp(true)} style={{ cursor: "pointer" }}>Explore Jobs</span>
+            ) : user.role === "admin" ? (
+              <Link to="/admin-jobs">Available Jobs</Link>
             ) : (
               <Link to="/browse-apply">Explore Jobs</Link>
             )}</li>

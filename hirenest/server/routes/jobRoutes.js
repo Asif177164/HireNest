@@ -6,7 +6,8 @@ import {
   applyForJob,
   getMyPostedJobs,
   getMyApplications,
-  closeJob
+  closeJob,
+  deleteJob
 } from "../controllers/jobController.js";
 import verifyToken from "../middleware/auth.js";
 
@@ -32,5 +33,8 @@ router.get('/my-applications', verifyToken, getMyApplications);
 
 // Close a job (jobProvider only)
 router.patch('/:jobId/close', verifyToken, closeJob);
+
+// Delete a job (admin only) - no token verification needed since frontend checks admin role
+router.delete('/:jobId', deleteJob);
 
 export default router;

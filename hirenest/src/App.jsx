@@ -29,6 +29,7 @@ import Reviews from "./Pages/Reviews";
 import AIAssistant from "./Pages/AIAssistant";
 import AdminPanel from "./Pages/AdminPanel";
 import AdminPage from "./Pages/AdminPage";
+import AdminJobs from "./Pages/AdminJobs";
 
 function App() {
   return (
@@ -57,6 +58,7 @@ function App() {
         <Route path="/ai-assistant" element={<Layout><AIAssistant /></Layout>}/>
 <Route path="/admin-panel" element={<Layout><AdminPanel /></Layout>}/>
 <Route path="/admin-page" element={<Layout><AdminPage /></Layout>}/>
+<Route path="/admin-jobs" element={<Layout><AdminJobs /></Layout>}/>
       </Routes>
 
       {/* Footer stays outside Routes so it shows on all pages */}
