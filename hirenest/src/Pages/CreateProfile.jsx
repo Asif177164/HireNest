@@ -173,18 +173,7 @@ const CreateProfile = () => {
         <button 
           type="submit" 
           disabled={loading} 
-          className="btn-modern-primary" 
-          style={{ 
-            width: '100%', 
-            padding: '16px', 
-            fontSize: '1.1rem',
-            fontWeight: '600',
-            border: 'none',
-            borderRadius: '12px',
-            background: 'linear-gradient(135deg, #2563eb, #3b82f6)',
-            color: 'white',
-            cursor: loading ? 'not-allowed' : 'pointer'
-          }}
+          className="btn-modern-primary"
         >
           {loading ? 'Uploading to Cloudinary...' : `Complete ${role} Profile`}
         </button>
