@@ -116,15 +116,7 @@ function Dashboard() {
             <h2>My Posted Jobs</h2>
             <button
               onClick={() => navigate('/post-job')}
-              style={{
-                padding: '12px 24px',
-                background: 'linear-gradient(135deg, #2563eb, #3b82f6)',
-                color: 'white',
-                border: 'none',
-                borderRadius: '8px',
-                cursor: 'pointer',
-                fontWeight: '600'
-              }}
+              className="btn-modern-primary"
             >
               + Post New Job
             </button>
@@ -136,16 +128,7 @@ function Dashboard() {
               <p>Start posting jobs to find talented freelancers.</p>
               <button
                 onClick={() => navigate('/post-job')}
-                style={{
-                  marginTop: '15px',
-                  padding: '12px 24px',
-                  background: '#2563eb',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '8px',
-                  cursor: 'pointer',
-                  fontWeight: '600'
-                }}
+                className="btn-modern-primary"
               >
                 Post Your First Job
               </button>
@@ -219,15 +202,7 @@ function Dashboard() {
                                   localStorage.setItem('chat_with', JSON.stringify(applicant.user));
                                   navigate('/chat');
                                 }}
-                                style={{
-                                  padding: '6px 12px',
-                                  background: '#2563eb',
-                                  color: 'white',
-                                  border: 'none',
-                                  borderRadius: '6px',
-                                  cursor: 'pointer',
-                                  fontSize: '0.85rem'
-                                }}
+                                className="btn-modern-primary"
                               >
                                 💬 Chat
                               </button>
@@ -268,16 +243,7 @@ function Dashboard() {
               <p>Browse jobs and apply to start working.</p>
               <button
                 onClick={() => navigate('/browse-apply')}
-                style={{
-                  marginTop: '15px',
-                  padding: '12px 24px',
-                  background: '#2563eb',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '8px',
-                  cursor: 'pointer',
-                  fontWeight: '600'
-                }}
+                className="btn-modern-primary"
               >
                 Browse Jobs
               </button>

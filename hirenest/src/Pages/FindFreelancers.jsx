@@ -121,16 +121,8 @@ function FindFreelancers() {
             <button
               key={field}
               onClick={() => setSelectedField(field)}
-              style={{
-                padding: '10px 20px',
-                borderRadius: '20px',
-                border: 'none',
-                background: selectedField === field ? '#2563eb' : '#e5e7eb',
-                color: selectedField === field ? 'white' : '#374151',
-                cursor: 'pointer',
-                fontWeight: '500',
-                transition: 'all 0.2s'
-              }}
+              className={selectedField === field ? 'btn-modern-primary' : 'btn-modern-secondary'}
+              style={selectedField === field ? {} : { padding: '10px 20px', borderRadius: '20px' }}
             >
               {field}
             </button>
@@ -239,34 +231,16 @@ function FindFreelancers() {
                 {canChat ? (
                   <button
                     onClick={() => handleChat(seeker)}
-                    style={{
-                      width: '100%',
-                      padding: '12px',
-                      background: 'linear-gradient(135deg, #2563eb, #3b82f6)',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '8px',
-                      cursor: 'pointer',
-                      fontWeight: '600',
-                      fontSize: '1rem'
-                    }}
+                    className="btn-modern-primary"
+                    style={{ width: '100%' }}
                   >
                     💬 Chat with Freelancer
                   </button>
                 ) : (
                   <button
                     disabled
-                    style={{
-                      width: '100%',
-                      padding: '12px',
-                      background: '#e5e7eb',
-                      color: '#9ca3af',
-                      border: 'none',
-                      borderRadius: '8px',
-                      fontWeight: '600',
-                      fontSize: '1rem',
-                      cursor: 'not-allowed'
-                    }}
+                    className="btn-modern-secondary"
+                    style={{ width: '100%', cursor: 'not-allowed' }}
                   >
                     🔒 Chat available for job providers
                   </button>
