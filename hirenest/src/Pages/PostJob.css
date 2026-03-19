@@ -118,3 +118,156 @@
   .pj-hero-inner h1 { font-size: 2.2rem; }
   .pj-main-body { padding: 2rem 1rem; }
 }
+
+/* ==========================================
+   Additional Responsive Styles for PostJob
+   ========================================== */
+
+/* Tablet and Mobile Adjustments */
+@media (max-width: 768px) {
+  .pj-hero {
+    padding: 4rem 1.5rem;
+  }
+  
+  .pj-hero-inner h1 {
+    font-size: 1.8rem;
+  }
+  
+  .pj-hero-inner p {
+    font-size: 1rem;
+  }
+  
+  .pj-main-body {
+    padding: 2rem 1rem;
+    gap: 2rem;
+  }
+  
+  .pj-info-section h2 {
+    font-size: 1.6rem;
+  }
+  
+  .pj-info-section p {
+    font-size: 1rem;
+  }
+  
+  .pj-card-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .pj-card {
+    padding: 1.5rem;
+  }
+  
+  .pj-card-num {
+    font-size: 2.5rem;
+  }
+  
+  .pj-card h4 {
+    font-size: 1.1rem;
+  }
+  
+  .pj-benefits-box {
+    padding: 2rem 1.5rem;
+  }
+  
+  .pj-benefits-box h3 {
+    font-size: 1.4rem;
+  }
+}
+
+/* Mobile Devices */
+@media (max-width: 480px) {
+  .pj-hero {
+    padding: 3rem 1rem;
+  }
+  
+  .pj-hero-inner h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .pj-hero-inner p {
+    font-size: 0.9rem;
+  }
+  
+  .pj-main-body {
+    padding: 1.5rem 0.75rem;
+    gap: 1.5rem;
+  }
+  
+  .pj-label {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+  }
+  
+  .pj-info-section h2 {
+    font-size: 1.35rem;
+  }
+  
+  .pj-info-section p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  
+  .pj-card-grid {
+    gap: 1rem;
+  }
+  
+  .pj-card {
+    padding: 1.25rem;
+  }
+  
+  .pj-card-num {
+    font-size: 2rem;
+    top: 8px;
+    right: 12px;
+  }
+  
+  .pj-card h4 {
+    font-size: 1rem;
+  }
+  
+  .pj-benefits-box {
+    padding: 1.5rem 1rem;
+  }
+  
+  .pj-benefits-box h3 {
+    font-size: 1.15rem;
+  }
+  
+  .pj-benefits-box p {
+    font-size: 0.85rem;
+  }
+}
+
+/* Small Mobile - iPhone SE */
+@media (max-width: 320px) {
+  .pj-hero {
+    padding: 2.5rem 0.75rem;
+  }
+  
+  .pj-hero-inner h1 {
+    font-size: 1.3rem;
+  }
+  
+  .pj-hero-inner p {
+    font-size: 0.85rem;
+  }
+  
+  .pj-main-body {
+    padding: 1rem 0.5rem;
+  }
+  
+  .pj-info-section h2 {
+    font-size: 1.15rem;
+  }
+  
+  .pj-card {
+    padding: 1rem;
+  }
+  
+  .pj-card h4 {
+    font-size: 0.95rem;
+  }
+}

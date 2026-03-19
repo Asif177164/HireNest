@@ -113,7 +113,7 @@ function Dashboard() {
 
       {user.role === 'jobProvider' ? (
         <div className="content-section">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+          <div className="dashboard-header">
             <h2>My Posted Jobs</h2>
             <button
               onClick={() => navigate('/post-job')}
@@ -124,10 +124,10 @@ function Dashboard() {
           </div>
 
           {myJobs.length === 0 ? (
-            <div className="feature-card" style={{ textAlign: 'center', padding: '48px' }}>
-              <div style={{ fontSize: '4rem', marginBottom: '16px' }}>📋</div>
-              <h3 style={{ marginBottom: '8px' }}>No jobs posted yet</h3>
-              <p style={{ color: 'var(--text-secondary)', marginBottom: '24px' }}>Start posting jobs to find talented freelancers.</p>
+            <div className="feature-card dashboard-empty-state">
+              <span className="dashboard-empty-icon">📋</span>
+              <h3 className="dashboard-empty-title">No jobs posted yet</h3>
+              <p className="dashboard-empty-text">Start posting jobs to find talented freelancers.</p>
               <button
                 onClick={() => navigate('/post-job')}
                 className="btn-modern-primary"
@@ -136,25 +136,25 @@ function Dashboard() {
               </button>
             </div>
           ) : (
-            <div style={{ display: 'grid', gap: '20px' }}>
+            <div className="dashboard-jobs-grid">
               {myJobs.map(job => (
-                <div key={job._id} className="feature-card" style={{ padding: '24px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
-                    <div style={{ flex: 1 }}>
-                      <h3 style={{ margin: '0 0 12px 0', fontSize: '1.25rem' }}>{job.title}</h3>
-                      <p style={{ margin: '0 0 8px 0', color: 'var(--text-secondary)' }}>
-                        <span style={{ fontWeight: '600' }}>Field:</span> {job.jobField} | 
-                        <span style={{ fontWeight: '600', marginLeft: '8px' }}>Budget:</span> {job.budget}
+                <div key={job._id} className="dashboard-job-card">
+                  <div className="dashboard-job-header">
+                    <div className="dashboard-job-info">
+                      <h3 className="dashboard-job-title">{job.title}</h3>
+                      <p className="dashboard-job-meta">
+                        <span>Field:</span> {job.jobField} | 
+                        <span>Budget:</span> {job.budget}
                       </p>
-                      <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
-                        <span style={{ fontWeight: '600' }}>Status:</span>{' '}
+                      <p className="dashboard-job-meta">
+                        <span>Status:</span>{' '}
                         <span style={{
                           color: job.status === 'open' ? 'var(--primary-green)' : '#ef4444',
                           fontWeight: '600'
                         }}>
                           {job.status.toUpperCase()}
                         </span>
-                        <span style={{ fontWeight: '600', marginLeft: '12px' }}>Applicants:</span> {job.applicants.length}
+                        <span>Applicants:</span> {job.applicants.length}
                       </p>
                     </div>
                     {job.status === 'open' && (
@@ -168,17 +168,17 @@ function Dashboard() {
                   </div>
 
                   {job.applicants.length > 0 && (
-                    <div style={{ marginTop: '20px', paddingTop: '20px', borderTop: '1px solid var(--border-light)' }}>
-                      <h4 style={{ margin: '0 0 16px 0' }}>Applicants ({job.applicants.length})</h4>
-                      <div style={{ display: 'grid', gap: '12px' }}>
+                    <div className="dashboard-applicants-section">
+                      <h4 className="dashboard-applicants-title">Applicants ({job.applicants.length})</h4>
+                      <div className="dashboard-applicants-grid">
                         {job.applicants.map((applicant, idx) => (
-                          <div key={idx} className="feature-card" style={{ padding: '16px', background: 'var(--bg-secondary)' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
-                              <div>
-                                <p style={{ margin: '0 0 4px 0', fontWeight: '600' }}>
+                          <div key={idx} className="dashboard-applicant-card">
+                            <div className="dashboard-applicant-header">
+                              <div className="dashboard-applicant-info">
+                                <p className="dashboard-applicant-name">
                                   {applicant.user?.firstName} {applicant.user?.lastName}
                                 </p>
-                                <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                                <p className="dashboard-applicant-field">
                                   Field: {applicant.user?.jobField}
                                 </p>
                               </div>
@@ -187,24 +187,17 @@ function Dashboard() {
                                   localStorage.setItem('chat_with', JSON.stringify(applicant.user));
                                   navigate('/chat');
                                 }}
-                                className="btn-modern-primary"
-                                style={{ padding: '8px 16px', fontSize: '0.9rem' }}
+                                className="dashboard-chat-btn"
                               >
                                 💬 Chat
                               </button>
                             </div>
                             {applicant.proposal && (
-                              <div style={{ 
-                                marginTop: '12px', 
-                                padding: '12px', 
-                                background: 'var(--bg-primary)', 
-                                borderRadius: 'var(--radius-sm)',
-                                border: '1px solid var(--border-light)'
-                              }}>
-                                <p style={{ margin: '0 0 6px 0', fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-primary)' }}>
+                              <div className="dashboard-proposal">
+                                <p className="dashboard-proposal-label">
                                   📝 Proposal:
                                 </p>
-                                <p style={{ margin: 0, fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+                                <p className="dashboard-proposal-text">
                                   {applicant.proposal}
                                 </p>
                               </div>
@@ -224,10 +217,10 @@ function Dashboard() {
           <h2>My Applications</h2>
           
           {myApplications.length === 0 ? (
-            <div className="feature-card" style={{ textAlign: 'center', padding: '48px' }}>
-              <div style={{ fontSize: '4rem', marginBottom: '16px' }}>📨</div>
-              <h3 style={{ marginBottom: '8px' }}>No applications yet</h3>
-              <p style={{ color: 'var(--text-secondary)', marginBottom: '24px' }}>Browse jobs and apply to start working.</p>
+            <div className="feature-card dashboard-empty-state">
+              <span className="dashboard-empty-icon">📨</span>
+              <h3 className="dashboard-empty-title">No applications yet</h3>
+              <p className="dashboard-empty-text">Browse jobs and apply to start working.</p>
               <button
                 onClick={() => navigate('/browse-apply')}
                 className="btn-modern-primary"
@@ -236,28 +229,21 @@ function Dashboard() {
               </button>
             </div>
           ) : (
-            <div style={{ display: 'grid', gap: '16px' }}>
+            <div className="dashboard-jobs-grid">
               {myApplications.map(job => (
-                <div key={job._id} className="feature-card" style={{ padding: '24px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
-                    <div>
-                      <h3 style={{ margin: '0 0 12px 0', fontSize: '1.25rem' }}>{job.title}</h3>
-                      <p style={{ margin: '0 0 8px 0', color: 'var(--text-secondary)' }}>
-                        <span style={{ fontWeight: '600' }}>Field:</span> {job.jobField} | 
-                        <span style={{ fontWeight: '600', marginLeft: '8px' }}>Budget:</span> {job.budget}
+                <div key={job._id} className="dashboard-job-card">
+                  <div className="dashboard-job-header">
+                    <div className="dashboard-job-info">
+                      <h3 className="dashboard-job-title">{job.title}</h3>
+                      <p className="dashboard-job-meta">
+                        <span>Field:</span> {job.jobField} | 
+                        <span>Budget:</span> {job.budget}
                       </p>
-                      <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
-                        <span style={{ fontWeight: '600' }}>Posted by:</span> {job.postedBy?.firstName} {job.postedBy?.lastName}
+                      <p className="dashboard-job-meta">
+                        <span>Posted by:</span> {job.postedBy?.firstName} {job.postedBy?.lastName}
                       </p>
                     </div>
-                    <span style={{
-                      padding: '8px 16px',
-                      background: job.status === 'open' ? 'var(--gradient-primary)' : '#fee2e2',
-                      color: job.status === 'open' ? 'white' : '#991b1b',
-                      borderRadius: 'var(--radius-full)',
-                      fontSize: '0.85rem',
-                      fontWeight: '600'
-                    }}>
+                    <span className={`dashboard-job-status ${job.status}`}>
                       {job.status.toUpperCase()}
                     </span>
                   </div>
