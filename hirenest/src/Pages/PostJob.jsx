@@ -120,21 +120,19 @@ function PostJob() {
         and receive proposals from qualified professionals.
       </p>
 
-      <div className="content-section" style={{ maxWidth: '700px', margin: '0 auto' }}>
-        <div className="complaint-card-modern">
-          <div className="complaint-header-modern">
-            <div className="complaint-icon-modern">📋</div>
+      <div className="content-section post-job-form-container">
+        <div className="post-job-card">
+          <div className="post-job-header">
+            <div className="post-job-icon">📋</div>
             <div>
-              <h2 style={{ margin: 0 }}>Create New Job Post</h2>
-              <p className="complaint-subtitle">Fill in the details to find the best talent</p>
+              <h2 className="post-job-title">Create New Job Post</h2>
+              <p className="post-job-subtitle">Fill in the details to find the best talent</p>
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="complaint-form-modern">
-            <div className="input-group">
-              <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--text-primary)' }}>
-                Job Title *
-              </label>
+          <form onSubmit={handleSubmit} className="post-job-form">
+            <div className="post-job-input-group">
+              <label>Job Title *</label>
               <input
                 type="text"
                 name="title"
@@ -142,37 +140,16 @@ function PostJob() {
                 onChange={handleChange}
                 placeholder="e.g., Need a React Developer for E-commerce Site"
                 required
-                style={{
-                  width: '100%',
-                  padding: '14px',
-                  borderRadius: 'var(--radius-md)',
-                  border: '2px solid var(--border-light)',
-                  fontSize: '1rem',
-                  background: 'var(--bg-secondary)',
-                  transition: 'all 0.3s ease'
-                }}
               />
             </div>
 
-            <div className="input-group">
-              <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--text-primary)' }}>
-                Job Field *
-              </label>
+            <div className="post-job-input-group">
+              <label>Job Field *</label>
               <select
                 name="jobField"
                 value={formData.jobField}
                 onChange={handleChange}
                 required
-                style={{ 
-                  width: '100%', 
-                  padding: '14px', 
-                  borderRadius: 'var(--radius-md)', 
-                  border: '2px solid var(--border-light)', 
-                  background: 'var(--bg-primary)', 
-                  fontSize: '1rem',
-                  color: 'var(--text-primary)',
-                  cursor: 'pointer'
-                }}
               >
                 <option value="">Select job field</option>
                 {jobFields.map(field => (
@@ -181,10 +158,8 @@ function PostJob() {
               </select>
             </div>
 
-            <div className="input-group">
-              <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--text-primary)' }}>
-                Budget *
-              </label>
+            <div className="post-job-input-group">
+              <label>Budget *</label>
               <input
                 type="text"
                 name="budget"
@@ -192,21 +167,11 @@ function PostJob() {
                 onChange={handleChange}
                 placeholder="e.g., $500 - $1000 or Fixed Price"
                 required
-                style={{
-                  width: '100%',
-                  padding: '14px',
-                  borderRadius: 'var(--radius-md)',
-                  border: '2px solid var(--border-light)',
-                  fontSize: '1rem',
-                  background: 'var(--bg-secondary)'
-                }}
               />
             </div>
 
-            <div className="input-group">
-              <label style={{ display: 'block', marginBottom: '8px', fontWeight: '600', color: 'var(--text-primary)' }}>
-                Job Description *
-              </label>
+            <div className="post-job-input-group">
+              <label>Job Description *</label>
               <textarea
                 name="description"
                 value={formData.description}
@@ -214,15 +179,6 @@ function PostJob() {
                 placeholder="Describe the job requirements, responsibilities, and expected deliverables..."
                 rows="5"
                 required
-                style={{ 
-                  width: '100%', 
-                  padding: '14px', 
-                  borderRadius: 'var(--radius-md)', 
-                  border: '2px solid var(--border-light)', 
-                  fontSize: '1rem', 
-                  resize: 'vertical',
-                  background: 'var(--bg-secondary)'
-                }}
               />
             </div>
 
@@ -235,8 +191,7 @@ function PostJob() {
             <button
               type="submit"
               disabled={loading}
-              className="btn-modern-primary"
-              style={{ width: '100%', padding: '16px', fontSize: '1.1rem' }}
+              className="btn-modern-primary post-job-submit-btn"
             >
               {loading ? '⏳ Posting Job...' : '✨ Post Job'}
             </button>
@@ -245,32 +200,31 @@ function PostJob() {
       </div>
 
       {myJobs.length > 0 && (
-        <div className="content-section" style={{ maxWidth: '800px', margin: '0 auto' }}>
+        <div className="content-section post-job-listed-section">
           <h2>My Posted Jobs ({myJobs.length})</h2>
-          <div style={{ display: 'grid', gap: '20px' }}>
+          <div className="post-job-listed-grid">
             {myJobs.map(job => (
-              <div key={job._id} className="feature-card" style={{ padding: '24px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
-                  <div style={{ flex: 1 }}>
-                    <h3 style={{ margin: '0 0 12px 0', fontSize: '1.25rem' }}>{job.title}</h3>
-                    <p style={{ margin: '0 0 8px 0', color: 'var(--text-secondary)' }}>
-                      <span style={{ fontWeight: '600' }}>Field:</span> {job.jobField} | 
-                      <span style={{ fontWeight: '600', marginLeft: '8px' }}>Budget:</span> {job.budget}
+              <div key={job._id} className="dashboard-job-card">
+                <div className="dashboard-job-header">
+                  <div className="dashboard-job-info">
+                    <h3 className="dashboard-job-title">{job.title}</h3>
+                    <p className="dashboard-job-meta">
+                      <span>Field:</span> {job.jobField} | 
+                      <span>Budget:</span> {job.budget}
                     </p>
-                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
-                      <span style={{ fontWeight: '600' }}>Status:</span>{' '}
+                    <p className="dashboard-job-meta">
+                      <span>Status:</span>{' '}
                       <span style={{
                         color: job.status === 'open' ? 'var(--primary-green)' : '#ef4444',
                         fontWeight: '600'
                       }}>{job.status.toUpperCase()}</span>{' '}| 
-                      <span style={{ fontWeight: '600', marginLeft: '8px' }}>Applicants:</span> {job.applicants.length}
+                      <span>Applicants:</span> {job.applicants.length}
                     </p>
                   </div>
                   {job.status === 'open' && (
                     <button
                       onClick={() => handleCloseJob(job._id)}
                       className="btn-delete-small"
-                      style={{ padding: '10px 20px' }}
                     >
                       Close Job
                     </button>
