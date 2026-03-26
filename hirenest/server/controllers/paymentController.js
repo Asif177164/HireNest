@@ -31,11 +31,20 @@ export const initializePayment = async (req, res) => {
       return res.status(404).json({ error: 'User not found' });
     }
 
+    let budgetAmount = 0;
+    const budgetStr = jobData.budget.toString();
+    const numbers = budgetStr.match(/\d+/g);
+    if (numbers && numbers.length > 0) {
+      budgetAmount = parseInt(numbers[0], 10);
+    }
+
+    const totalAmount = JOB_POSTING_FEE + budgetAmount;
+
     const transactionId = `JOB_${Date.now()}_${userId.toString().slice(-6)}`;
 
     const payment = new Payment({
       userId,
-      amount: JOB_POSTING_FEE,
+      amount: totalAmount,
       currency: 'BDT',
       status: 'pending',
       transactionId,
@@ -46,7 +55,7 @@ export const initializePayment = async (req, res) => {
     const formData = new FormData();
     formData.append('store_id', STORE_ID);
     formData.append('store_passwd', STORE_PASSWORD);
-    formData.append('total_amount', JOB_POSTING_FEE.toString());
+    formData.append('total_amount', totalAmount.toString());
     formData.append('currency', 'BDT');
     formData.append('tran_id', transactionId);
     formData.append('success_url', `http://localhost:5004/api/payments/success?tran_id=${transactionId}&jobData=${encodeURIComponent(JSON.stringify(jobData))}`);
@@ -138,10 +147,18 @@ export const handlePaymentSuccess = async (req, res) => {
     let payment = await Payment.findOne({ transactionId: tranId });
     
     if (!payment && jobData) {
+      let budgetAmount = 0;
+      const budgetStr = jobData.budget ? jobData.budget.toString() : '';
+      const numbers = budgetStr.match(/\d+/g);
+      if (numbers && numbers.length > 0) {
+        budgetAmount = parseInt(numbers[0], 10);
+      }
+      const totalAmount = JOB_POSTING_FEE + budgetAmount;
+
       payment = new Payment({
         userId: req.user?.id,
         transactionId: tranId,
-        amount: JOB_POSTING_FEE,
+        amount: totalAmount,
         currency: 'BDT',
         status: 'completed',
         jobData

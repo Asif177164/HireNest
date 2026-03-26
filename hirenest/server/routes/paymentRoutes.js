@@ -20,4 +20,9 @@ router.post('/ipn', handlePaymentIPN);
 
 router.get('/status/:transactionId', verifyToken, getPaymentStatus);
 
+router.get('/posting-fee', (req, res) => {
+  const fee = parseInt(process.env.JOB_POSTING_FEE) || 100;
+  res.json({ fee });
+});
+
 export default router;
