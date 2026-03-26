@@ -15,6 +15,7 @@ function PostJob() {
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
   const [myJobs, setMyJobs] = useState([]);
+  const [postingFee, setPostingFee] = useState(100);
 
   const API_BASE = import.meta.env.VITE_API_URL || "/api";
   const token = localStorage.getItem('token');
@@ -38,7 +39,18 @@ function PostJob() {
     if (!token) navigate('/');
     
     fetchMyJobs();
+    fetchPostingFee();
   }, [navigate, token]);
+
+  const getTotalPayment = () => {
+    let budgetAmount = 0;
+    const budgetStr = formData.budget.toString();
+    const numbers = budgetStr.match(/\d+/g);
+    if (numbers && numbers.length > 0) {
+      budgetAmount = parseInt(numbers[0], 10);
+    }
+    return postingFee + budgetAmount;
+  };
 
   const fetchMyJobs = async () => {
     try {
@@ -51,6 +63,18 @@ function PostJob() {
       }
     } catch (error) {
       console.error('Error fetching jobs:', error);
+    }
+  };
+
+  const fetchPostingFee = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/payments/posting-fee`);
+      if (res.ok) {
+        const data = await res.json();
+        setPostingFee(data.fee);
+      }
+    } catch (error) {
+      console.error('Error fetching posting fee:', error);
     }
   };
 
@@ -72,7 +96,6 @@ function PostJob() {
     }
 
     try {
-      // Initialize payment with SSLCommerz
       const res = await fetch(`${API_BASE}/payments/initialize`, {
         method: 'POST',
         headers: {
@@ -89,7 +112,6 @@ function PostJob() {
         throw new Error(data.error || data.failedreason || 'Failed to initialize payment');
       }
 
-      // Redirect to SSLCommerz payment page
       console.log('Redirecting to:', data.paymentUrl);
       setMessage('Redirecting to payment gateway...');
       setMessageType('success');
@@ -196,9 +218,12 @@ function PostJob() {
               border: '1px solid var(--border-color)'
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span style={{ fontWeight: '600', color: 'var(--text-primary)' }}>Job Posting Fee:</span>
+                <span style={{ fontWeight: '600', color: 'var(--text-primary)' }}>Total Payment:</span>
                 <span style={{ fontSize: '1.5rem', fontWeight: '700', color: 'var(--primary-green)' }}>
-                  ৳100 BDT
+                  ৳{getTotalPayment()} BDT
+                  <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: '400' }}>
+                    (Fee: ৳{postingFee} + Budget: ৳{formData.budget ? formData.budget.replace(/[^0-9]/g, '') || 0 : 0})
+                  </span>
                 </span>
               </div>
               <p style={{ margin: '8px 0 0 0', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
@@ -217,7 +242,7 @@ function PostJob() {
               disabled={loading}
               className="btn-modern-primary post-job-submit-btn"
             >
-              {loading ? '⏳ Redirecting to Payment...' : '💳 Pay ৳100 & Post Job'}
+              {loading ? '⏳ Redirecting to Payment...' : `💳 Pay ৳${getTotalPayment()} & Post Job`}
             </button>
           </form>
         </div>
