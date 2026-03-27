@@ -49,7 +49,7 @@ function FindFreelancers() {
 
   const filteredSeekers = selectedField === 'All' 
     ? jobSeekers 
-    : jobSeekers.filter(s => s.jobField === selectedField);
+    : jobSeekers.filter(s => s.jobField && s.jobField.includes(selectedField));
 
   const canChat = user && user.role === 'jobProvider';
 

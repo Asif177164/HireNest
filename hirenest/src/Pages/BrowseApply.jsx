@@ -70,7 +70,7 @@ function BrowseApply() {
   };
 
   const canApplyToJob = (job) => {
-    return user && user.jobField && job.jobField === user.jobField;
+    return user && user.jobField && user.jobField.includes(job.jobField);
   };
 
   const handleFieldFilter = (field) => {
