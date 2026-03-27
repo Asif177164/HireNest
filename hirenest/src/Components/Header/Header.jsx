@@ -207,7 +207,7 @@ const Header = ({
                       {user.firstName?.charAt(0) || user.username?.charAt(0)}
                     </span>
                   )}
-                  <span>Hi, {user.firstName || user.username}</span>
+                  <Link to="/profile" style={{ textDecoration: 'none', color: 'inherit' }}>Hi, {user.firstName || user.username}</Link>
                 </li>
                 <li>
                   <button className="btn-logout" onClick={() => {

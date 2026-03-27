@@ -359,7 +359,14 @@ function Chat() {
                         )}
                       </div>
                       <div className="user-details">
-                        <span className="user-name">
+                        <span 
+                          className="user-name"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            navigate(`/profile/${user._id}`);
+                          }}
+                          style={{ cursor: 'pointer' }}
+                        >
                           {user.firstName} {user.lastName}
                         </span>
                         <span
@@ -403,7 +410,14 @@ function Chat() {
                   </div>
                   <div className="conversation-content">
                     <div className="conversation-header">
-                      <span className="conversation-name">
+                      <span 
+                        className="conversation-name"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          navigate(`/profile/${conv.otherUser?._id}`);
+                        }}
+                        style={{ cursor: 'pointer' }}
+                      >
                         {conv.otherUser?.firstName} {conv.otherUser?.lastName}
                       </span>
                       <span className="conversation-time">
@@ -454,7 +468,11 @@ function Chat() {
                     )}
                   </div>
                   <div className="chat-user-details">
-                    <span className="chat-user-name">
+                    <span 
+                      className="chat-user-name"
+                      onClick={() => navigate(`/profile/${selectedUser._id}`)}
+                      style={{ cursor: 'pointer' }}
+                    >
                       {selectedUser.firstName} {selectedUser.lastName}
                     </span>
                     <span

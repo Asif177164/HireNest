@@ -31,6 +31,7 @@ import AdminPanel from "./Pages/AdminPanel";
 import AdminPage from "./Pages/AdminPage";
 import AdminJobs from "./Pages/AdminJobs";
 import Dashboard from "./Pages/Dashboard";
+import Profile from "./Pages/Profile";
 import PaymentSuccess from "./Pages/PaymentSuccess";
 import PaymentFail from "./Pages/PaymentFail";
 import PaymentCancel from "./Pages/PaymentCancel";
@@ -64,6 +65,8 @@ function App() {
 <Route path="/admin-page" element={<Layout><AdminPage /></Layout>}/>
         <Route path="/admin-jobs" element={<Layout><AdminJobs /></Layout>}/>
         <Route path="/dashboard" element={<Layout><Dashboard /></Layout>}/>
+        <Route path="/profile" element={<Layout><Profile /></Layout>}/>
+        <Route path="/profile/:userId" element={<Layout><Profile /></Layout>}/>
         <Route path="/payment-success" element={<Layout><PaymentSuccess /></Layout>}/>
         <Route path="/payment-fail" element={<Layout><PaymentFail /></Layout>}/>
         <Route path="/payment-cancel" element={<Layout><PaymentCancel /></Layout>}/>

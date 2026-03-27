@@ -403,6 +403,13 @@ function Dashboard() {
                               <div className="applicant-details">
                                 <p className="applicant-name">
                                   {applicant.user?.firstName} {applicant.user?.lastName}
+                                  <span 
+                                    className="applicant-username"
+                                    onClick={() => navigate(`/profile/${applicant.user?._id}`)}
+                                    style={{ cursor: 'pointer' }}
+                                  >
+                                    @{applicant.user?.username}
+                                  </span>
                                   {applicant.status === 'accepted' && (
                                     <span className="badge-accepted">✓ Accepted</span>
                                   )}

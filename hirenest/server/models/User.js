@@ -21,11 +21,26 @@ const userSchema = new mongoose.Schema(
     nidImages: [{ type: String }], 
     certificationImages: [{ type: String }], 
     profilePicture: { type: String },
-    jobField: { 
+    jobField: [{ 
       type: String, 
       enum: ['Web Development', 'App Development', 'UI/UX Design', 'Marketing'],
-      required: false 
-    },
+    }],
+    experience: [{
+      company: { type: String, trim: true },
+      position: { type: String, trim: true },
+      startDate: { type: Date },
+      endDate: { type: Date },
+      description: { type: String, trim: true },
+      isCurrent: { type: Boolean, default: false },
+    }],
+    education: [{
+      institution: { type: String, trim: true },
+      degree: { type: String, trim: true },
+      fieldOfStudy: { type: String, trim: true },
+      startDate: { type: Date },
+      endDate: { type: Date },
+      description: { type: String, trim: true },
+    }],
     appliedJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Job' }],
     ratings: [{
       jobId: { type: mongoose.Schema.Types.ObjectId, ref: 'Job' },

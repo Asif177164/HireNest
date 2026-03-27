@@ -70,7 +70,7 @@ function BrowseApply() {
   };
 
   const canApplyToJob = (job) => {
-    return user && user.jobField && job.jobField === user.jobField;
+    return user && user.jobField && user.jobField.includes(job.jobField);
   };
 
   const handleFieldFilter = (field) => {
@@ -268,7 +268,13 @@ function BrowseApply() {
                         {job.description.length > 200 ? job.description.substring(0, 200) + '...' : job.description}
                       </p>
                       <p className="browse-job-posted">
-                        Posted by: {job.postedBy?.firstName} {job.postedBy?.lastName} ({job.postedBy?.username})
+                        Posted by: 
+                        <span 
+                          onClick={() => navigate(`/profile/${job.postedBy?._id}`)}
+                          style={{ cursor: 'pointer', color: 'var(--primary-green)', fontWeight: '600' }}
+                        >
+                          {job.postedBy?.firstName} {job.postedBy?.lastName} ({job.postedBy?.username})
+                        </span>
                       </p>
                     </div>
                     <div className="browse-applicants-badge">

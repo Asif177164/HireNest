@@ -96,8 +96,8 @@ export const applyForJob = async (req, res) => {
       return res.status(400).json({ error: 'This job is no longer accepting applications' });
     }
 
-    if (job.jobField !== user.jobField) {
-      return res.status(400).json({ error: `You can only apply for ${user.jobField} jobs` });
+    if (!user.jobField.includes(job.jobField)) {
+      return res.status(400).json({ error: `You can only apply for ${user.jobField.join(', ')} jobs` });
     }
 
     const alreadyApplied = job.applicants.some(
