@@ -313,15 +313,15 @@ export const getClosedJobsForPayment = async (req, res) => {
     }
 
     // Find all closed jobs that haven't been paid yet
-    // Get all job IDs that have admin payments (completed or pending)
+    // Get all job IDs that have admin payments (any status)
     const paidJobIds = await Payment.distinct('jobId', { 
-      paymentType: 'adminPayment',
-      status: { $in: ['completed', 'pending'] }
+      paymentType: 'adminPayment'
     });
     
-    // Find all closed jobs that are NOT in the paidJobIds list
+    // Find all closed or completed jobs that are NOT in the paidJobIds list
+    // This includes jobs with or without acceptedApplicant
     const closedJobs = await Job.find({ 
-      status: 'closed',
+      status: { $in: ['closed', 'completed'] },
       _id: { $nin: paidJobIds }
     })
     .populate('postedBy', 'firstName lastName email username')
@@ -379,8 +379,8 @@ export const initializeAdminPayment = async (req, res) => {
       return res.status(404).json({ error: 'Job not found' });
     }
 
-    if (job.status !== 'closed') {
-      return res.status(400).json({ error: 'Job is not closed' });
+    if (job.status !== 'closed' && job.status !== 'completed') {
+      return res.status(400).json({ error: 'Job is not closed or completed' });
     }
 
     // Check if payment already exists for this job
