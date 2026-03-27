@@ -176,7 +176,12 @@ function FindFreelancers() {
                   )}
                   <div style={{ marginLeft: '16px' }}>
                     <h3 style={{ margin: '0 0 4px 0', fontSize: '1.25rem' }}>{seeker.firstName} {seeker.lastName}</h3>
-                    <p style={{ margin: 0, color: 'var(--text-secondary)', fontSize: '0.95rem' }}>@{seeker.username}</p>
+                    <p 
+                      style={{ margin: 0, color: 'var(--primary-green)', fontSize: '0.95rem', cursor: 'pointer', fontWeight: '600' }}
+                      onClick={() => navigate(`/profile/${seeker._id}`)}
+                    >
+                      @{seeker.username}
+                    </p>
                   </div>
                 </div>
 

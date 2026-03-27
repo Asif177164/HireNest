@@ -22,6 +22,7 @@ import jobRoutes from "./routes/jobRoutes.js";
 import chatRoutes from "./routes/chatRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 import verifyToken from "./middleware/auth.js";
+import errorHandler from "./middleware/errorHandler.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -180,10 +181,21 @@ import { uploadToCloudinary } from "./middleware/upload.js";
 import {
   completeProfile,
   getProfile,
+  updateProfile,
 } from "./controllers/profileController.js";
 
 // Profile routes - append
 app.get("/api/auth/profile", verifyToken, getProfile);
+
+app.put(
+  "/api/auth/profile",
+  multer({ storage: multer.memoryStorage() }).fields([
+    { name: "certificationImages", maxCount: 5 },
+    { name: "profilePicture", maxCount: 1 },
+  ]),
+  verifyToken,
+  updateProfile,
+);
 
 app.put(
   "/api/auth/complete-profile",
@@ -195,6 +207,23 @@ app.put(
   verifyToken,
   completeProfile,
 );
+
+// Get user profile by ID (for viewing other users' profiles)
+app.get("/api/users/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const user = await User.findById(userId).select("-passwordHash -verificationToken");
+    
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    
+    res.json(user);
+  } catch (error) {
+    console.error("Get user profile error:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
 
 /* =========================
    ADMIN ROUTES
@@ -321,6 +350,9 @@ app.delete("/api/complaints/:id", async (req, res) => {
 app.get("/api/health", (req, res) => {
   res.json({ status: "Server running" });
 });
+
+// Centralized Error Handler (must be last middleware)
+app.use(errorHandler);
 
 /* =========================
    REGISTER USER

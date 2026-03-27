@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./Pages.css";
 
 function AdminPage() {
@@ -271,7 +272,7 @@ function AdminPage() {
                           <tr key={user._id}>
                             <td className="id-cell">{user._id.slice(-6)}</td>
                             <td>{user.firstName} {user.lastName}</td>
-                            <td>{user.username}</td>
+                            <td><Link to={`/profile/${user._id}`} className="username-link">{user.username}</Link></td>
                             <td>{user.email}</td>
                             <td>
                               <span className={`role-badge role-${user.role}`}>
@@ -309,7 +310,7 @@ function AdminPage() {
                           </span>
                         </div>
                         <div className="user-card-info">
-                          <span className="user-card-username">@{user.username}</span>
+                          <Link to={`/profile/${user._id}`} className="user-card-username">@{user.username}</Link>
                           <span>{user.email}</span>
                           <span>ID: {user._id.slice(-6)}</span>
                           <span className={`status-badge ${user.isVerified ? "status-resolved" : "status-pending"}`}>
