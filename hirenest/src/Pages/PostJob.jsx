@@ -193,7 +193,7 @@ function PostJob() {
                 name="budget"
                 value={formData.budget}
                 onChange={handleChange}
-                placeholder="e.g., $500 - $1000 or Fixed Price"
+                placeholder="e.g., ৳50000 - ৳100000 or Fixed Price"
                 required
               />
             </div>
